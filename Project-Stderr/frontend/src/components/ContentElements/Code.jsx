@@ -11,9 +11,10 @@ const Title = styled.div`
   width: 100%;
   padding: 10px 30px;
   font-size: 25px;
+  color: #797979;
 `;
 
-const CommentBox = styled.div`
+const TextBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,14 +24,17 @@ const CommentBox = styled.div`
   border-radius: 30px;
 `;
 
-const Comment = styled.textarea`
-  width: calc(100% - 50px);
-  height: calc(100% - 50px);
+const Text = styled.textarea`
+  width: calc(100% - 60px);
+  height: calc(100% - 60px);
   background-color: #f7f7f7;
   border: none;
   outline: none;
   font-size: 16px;
   resize: none;
+  &::placeholder {
+    color: #bebebe;
+  }
 `;
 
 const CodeButtonBox = styled.div`
@@ -56,9 +60,9 @@ function Code() {
   return (
     <CodeBody>
       <Title>Code</Title>
-      <CommentBox>
-        <Comment type="text" placeholder="Comments.." />
-      </CommentBox>
+      <TextBox>
+        <Text type="text" placeholder="Comments.." />
+      </TextBox>
       <CodeButtonBox>
         <CodeButton>
           <IoMdArrowDropdown size={40} />
