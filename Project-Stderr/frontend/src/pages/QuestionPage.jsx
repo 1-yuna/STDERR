@@ -1,11 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
+import Background from "../components/Background";
 
 function QuestionPage() {
   return (
-    <div>
-      <h1>Question</h1>
-    </div>
+    <Background>
+      <h1>QuestionPage</h1>
+    </Background>
   );
 }
 
