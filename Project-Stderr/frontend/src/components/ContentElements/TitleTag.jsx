@@ -2,6 +2,9 @@
 import React from "react";
 import styled from "styled-components";
 
+// <TitleTag name="Title" />
+// <TitleTag name="Tags" />
+
 const TitleTagBody = styled.div`
   width: 100%;
 `;
