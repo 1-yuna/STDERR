@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const CodeBody = styled.div`
+const CommentBody = styled.div`
   width: 100%;
 `;
 
@@ -39,12 +39,12 @@ const Text = styled.textarea`
 
 function Comment() {
   return (
-    <CodeBody>
+    <CommentBody>
       <Title>Comment</Title>
       <TextBox>
         <Text type="text" placeholder="Comments.." />
       </TextBox>
-    </CodeBody>
+    </CommentBody>
   );
 }
 
