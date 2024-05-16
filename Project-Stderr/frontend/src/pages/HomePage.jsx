@@ -1,14 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import Question from "../components/ContentElements/Question.jsx";
-import Code from "../components/ContentElements/Code.jsx";
 import Background from "../components/Background";
+import TopBar from "../components/Bar/TopBar.jsx";
+import SignupBar from "../components/Bar/SignupBar.jsx";
+import Post from "../components/Post/Post.jsx";
 
 function HomePage() {
   return (
     <Background>
-      <Question />
-      <Code />
+      <TopBar />
+      <SignupBar />
+      <Post />
     </Background>
   );
 }
