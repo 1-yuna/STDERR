@@ -22,9 +22,20 @@ repositories {
 }
 
 dependencies {
+	// Spring Boot Web Starter
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Spring Data JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// MySQL Connector
+	runtimeOnly 'mysql:mysql-connector-java:8.0.33'
+
+	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	// Test dependencies
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
@@ -32,3 +43,4 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
