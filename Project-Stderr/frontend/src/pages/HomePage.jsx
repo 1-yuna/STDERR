@@ -264,19 +264,26 @@ function HomePage() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
-    <PageSetting>
+    <PageSetting onClick={closeSidebar}>
       <Background>
         <ErrorDeco1>404: Not found</ErrorDeco1>
         <ErrorDeco2>403: Forbidden</ErrorDeco2>
         <ErrorDeco3>405: Gate found</ErrorDeco3>
         <TopBox>
           <HamburgerBar
-            onClick={toggleSidebar}
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleSidebar();
+            }}
             isOpen={isSidebarOpen}
           ></HamburgerBar>
 
-          <Sidebar isOpen={isSidebarOpen}>
+          <Sidebar isOpen={isSidebarOpen} onClick={(e) => e.stopPropagation()}>
             <HomeButton>
               <ColoredHome size={24} />
               <Home>Home</Home>
