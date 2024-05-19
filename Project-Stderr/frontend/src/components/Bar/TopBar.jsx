@@ -160,12 +160,25 @@ const LanguagesBox = styled.button`
   width: 100%;
   height: 60px;
   border-bottom: 2px solid #ffffff;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  &:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+  }
 `;
 
 const LanguagesName = styled.button`
   font-weight: bold;
   font-size: 15px;
   color: #fff;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  ${LanguagesBox}:hover & {
+    color: #8145cd;
+  }
 `;
 
 const CommunicateContainer = styled.div`
@@ -180,12 +193,25 @@ const CommunicateBox = styled.button`
   padding: 0 10px;
   width: 100%;
   height: 60px;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  &:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+  }
 `;
 
 const ForumName = styled.button`
   font-weight: bold;
   font-size: 15px;
   color: #fff;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  ${CommunicateBox}:hover & {
+    color: #8145cd;
+  }
 `;
 
 function TopBar() {
