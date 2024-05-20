@@ -1,8 +1,9 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 const QuestionBody = styled.div`
   width: 100%;
@@ -106,13 +107,41 @@ const HeartBox = styled.div`
   font-size: 20px;
 `;
 
-const HeartIcon = styled(IoMdHeartEmpty)`
-  padding-right: 20px; /* 패딩 값 설정 */
+const HeartIcon = styled(FaHeart)`
+  //padding-right: 20px; /* 패딩 값 설정 */
   font-size: 50px;
   color: #8145cd;
+  cursor: pointer;
+`;
+
+const UnHeartIcon = styled(FaRegHeart)`
+  //padding-right: 20px; /* 패딩 값 설정 */
+  font-size: 50px;
+  color: #8145cd;
+  cursor: pointer;
+`;
+
+const HeartCount = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 20px;
+  font-size: 12px;
 `;
 
 function Question() {
+  const [heartClicked, setHeartClicked] = useState(false);
+  const [count, setCount] = useState(0);
+
+  const handleHeartClick = () => {
+    if (heartClicked) {
+      setCount(count - 1); // 클릭이 이미 되어 있을 때 클릭된 횟수를 1 줄임
+    } else {
+      setCount(count + 1); // 클릭되어 있지 않을 때 클릭된 횟수를 1 증가
+    }
+    setHeartClicked(!heartClicked); // 클릭 상태 변경
+  };
+
   return (
     <QuestionBody>
       <Title>Question</Title>
@@ -128,10 +157,15 @@ function Question() {
             <IoMdArrowDropdown size={40} />
           </Button>
         </SecondBox>
-
         <ThreeBox>
           <HeartBox>
-            <HeartIcon />2
+            {/*<HeartIcon heartClicked={heartClicked} onClick={handleHeartClick} />*/}
+            {heartClicked ? (
+              <HeartIcon onClick={handleHeartClick} size={20} />
+            ) : (
+              <UnHeartIcon onClick={handleHeartClick} size={20} />
+            )}
+            <HeartCount>{count}</HeartCount>
           </HeartBox>
         </ThreeBox>
       </BottomBox>
