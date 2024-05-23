@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 import MyPageBackground from "../components/Background/MyPageBackground.jsx";
 import TopBar from "../components/Bar/TopBar.jsx";
 import { GoCopilot } from "react-icons/go";
@@ -13,6 +14,10 @@ const GradeSymbolAI = styled(GoCopilot)`
   @media (max-width: 1070px) {
     font-size: 20px;
   }
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 const GradeSymbolEngineer = styled(MdOutlineEngineering)`
@@ -21,6 +26,10 @@ const GradeSymbolEngineer = styled(MdOutlineEngineering)`
   @media (max-width: 1070px) {
     font-size: 20px;
   }
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 const GradeSymbolJr = styled(TbMoodKid)`
@@ -28,6 +37,10 @@ const GradeSymbolJr = styled(TbMoodKid)`
 
   @media (max-width: 1070px) {
     font-size: 20px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 15px;
   }
 `;
 
@@ -45,12 +58,19 @@ const EditButton = styled.button`
   text-align: center;
   color: #8145cd;
   border-radius: 15px;
-  border: 2px solid #8145cd; 
-    transition: background-color 0.3s, color 0.3s;
-    &:hover {
-        background-color: #8145cd;
-        color: #ffffff;
-        border-color: #ffffff;
+  border: 2px solid #8145cd;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  &:hover {
+    background-color: #8145cd;
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  @media (max-width: 768px) {
+    width: 60%;
+  }
 `;
 
 const DivBox1 = styled.div`
@@ -74,11 +94,19 @@ const InfoBox = styled.div`
   justify-content: space-evenly;
   height: 100%;
   width: 60%;
+
+  @media (max-width: 1070px) {
+    padding-left: 10px;
+  }
 `;
 
 const Name = styled.div`
   font-size: 30px;
   font-weight: 900;
+
+  @media (max-width: 1070px) {
+    font-size: 20px;
+  }
 `;
 
 const NotName = styled.div`
@@ -90,6 +118,7 @@ const NotName = styled.div`
 `;
 
 const Oneliner = styled.div`
+  white-space: nowrap;
   font-size: 15px;
   color: #b4b4b4;
 `;
@@ -102,6 +131,10 @@ const ProfileContainer = styled.div`
   border-bottom: 1px solid #d9d9d9;
   align-items: center;
   padding: 0 10%;
+
+  @media (max-width: 768px) {
+    padding: 0 0;
+  }
 `;
 
 const StatContainer = styled.div`
@@ -148,11 +181,19 @@ const ScoreBox = styled.div`
 
 const ScoreType = styled.div`
   font-size: 15px;
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
 `;
 
 const Score = styled.div`
   font-weight: bold;
   font-size: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 const DivBox4 = styled.div`
@@ -205,11 +246,19 @@ const RankStd = styled.div`
   @media (max-width: 1070px) {
     font-size: 12px;
   }
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
 `;
 
 function MyPage() {
   return (
     <MyPageBackground>
+      <Helmet>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Profile</title>
+      </Helmet>
       <TopBar />
       <ProfileContainer>
         <DivBox1>

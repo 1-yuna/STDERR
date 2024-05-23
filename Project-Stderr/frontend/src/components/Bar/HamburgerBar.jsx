@@ -6,13 +6,18 @@ import styled from "styled-components";
 const HamburgerBox = styled.button`
   display: flex;
   flex-direction: column;
-  margin-right: 60px;
+  margin-right: 30px;
   width: 45px;
   height: 35px;
   justify-content: space-evenly;
   align-items: center;
   cursor: pointer;
   z-index: 999;
+  @media (max-width: 768px) {
+    margin-right: 15%;
+    width: 30px;
+    height: 35px;
+  }
 `;
 
 const HamburgerStyle = styled.div`

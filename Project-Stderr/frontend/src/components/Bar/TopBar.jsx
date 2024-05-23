@@ -5,14 +5,34 @@ import HamburgerBar from "./HamburgerBar.jsx";
 import { FaSearch } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 
+const LogoBox = styled.button`
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  @media (max-width: 768px) {
+    width: 160px;
+  }
+`;
+
 const Logo = styled.img`
-  //margin-right: 40px;
   width: 165px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    margin-right: 20px;
+    width: 120px;
+  }
 `;
 
 const NullBox = styled.div`
   width: 45px;
   height: 35px;
+
+  @media (max-width: 768px) {
+    width: 0;
+    height: 0;
+  }
 `;
 
 const TopBox = styled.div`
@@ -49,10 +69,13 @@ const SearchBar = styled.div`
   background-color: #efefef;
   border-radius: 30px;
   border: 2px solid #d9d9d9;
+  @media (max-width: 768px) {
+    width: 250px;
+  }
 `;
 
 const SearchGuide = styled.input`
-  width: calc(100% - 30px);
+  width: calc(100% - 40px);
   height: calc(100% - 10px);
   background-color: #efefef;
   border: none;
@@ -63,10 +86,15 @@ const SearchGuide = styled.input`
   &::placeholder {
     color: #bebebe;
   }
+
+  @media (max-width: 527px) {
+    &::placeholder {
+      color: #efefef;
+    }
+  }
 `;
 
 const MyPageButton = styled.button`
-  //padding-left: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,6 +103,10 @@ const MyPageButton = styled.button`
   background-color: #ffffff;
   color: #8145cd;
   text-align: center;
+  @media (max-width: 768px) {
+    width: 60px;
+    font-size: 11px;
+  }
 `;
 
 const LogoutButton = styled.button`
@@ -88,17 +120,33 @@ const LogoutButton = styled.button`
   text-align: center;
   border-radius: 30px;
   border: 2px solid #8145cd;
-    transition: background-color 0.3s, color 0.3s;
-    &:hover {
-        background-color: #8145cd;
-        color: #ffffff;
-        border-color: #ffffff;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  &:hover {
+    background-color: #8145cd;
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+  @media (max-width: 768px) {
+    width: 60px;
+    font-size: 11px;
+  }
 `;
 
-const DivBox = styled.button`
+const DivBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 250px;
+  @media (max-width: 768px) {
+    width: fit-content;
+  }
 `;
 
 const Sidebar = styled.div`
@@ -214,6 +262,16 @@ const ForumName = styled.button`
   }
 `;
 
+const PageSetting = styled.div`
+  display: ${(props) => (props.isOpen ? "block" : "none")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+`;
+
 function TopBar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -221,60 +279,69 @@ function TopBar() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   return (
-    <TopBox>
-      <DivBox>
-        <HamburgerBar
-          onClick={toggleSidebar}
-          isOpen={isSidebarOpen}
-        ></HamburgerBar>
-        <Logo src={"/STDERR_LOGO_concat_ver.png"} alt="로고" />
-      </DivBox>
-      <Sidebar isOpen={isSidebarOpen}>
-        <HomeButton>
-          <ColoredHome size={24} />
-          <Home>Home</Home>
-        </HomeButton>
-        <LanguagesContainer>
-          <CategoryFont>Languages</CategoryFont>
-          <LanguagesBox>
-            <LanguagesName>C / C++ / C#</LanguagesName>
-          </LanguagesBox>
-          <LanguagesBox>
-            <LanguagesName>Java / Kotlin</LanguagesName>
-          </LanguagesBox>
-          <LanguagesBox>
-            <LanguagesName>Python</LanguagesName>
-          </LanguagesBox>
-          <LanguagesBox>
-            <LanguagesName>Go / Rust / Zig</LanguagesName>
-          </LanguagesBox>
-          <LanguagesBox>
-            <LanguagesName>Swift</LanguagesName>
-          </LanguagesBox>
-          <LanguagesBox>
-            <LanguagesName>etc.</LanguagesName>
-          </LanguagesBox>
-        </LanguagesContainer>
-        <CommunicateContainer>
-          <CategoryFont>Communicate</CategoryFont>
-          <CommunicateBox>
-            <ForumName>Forum</ForumName>
-          </CommunicateBox>
-        </CommunicateContainer>
-      </Sidebar>
-      <SearchBar>
-        <ColoredSearch />
-        <SearchGuide type="text" placeholder="#tag, title" />
-      </SearchBar>
-      <DivBox>
-        <MyPageButton>profile</MyPageButton>
-        <LogoutButton>logout</LogoutButton>
-      </DivBox>
-      <DivBox>
-        <NullBox />
-      </DivBox>
-    </TopBox>
+    <>
+      <TopBox>
+        <DivBox>
+          <HamburgerBar
+            onClick={toggleSidebar}
+            isOpen={isSidebarOpen}
+          ></HamburgerBar>
+          <LogoBox>
+            <Logo src={"/STDERR_LOGO_concat_ver.png"} alt="로고" />
+          </LogoBox>
+        </DivBox>
+        <Sidebar isOpen={isSidebarOpen}>
+          <HomeButton>
+            <ColoredHome size={24} />
+            <Home>Home</Home>
+          </HomeButton>
+          <LanguagesContainer>
+            <CategoryFont>Languages</CategoryFont>
+            <LanguagesBox>
+              <LanguagesName>C / C++ / C#</LanguagesName>
+            </LanguagesBox>
+            <LanguagesBox>
+              <LanguagesName>Java / Kotlin</LanguagesName>
+            </LanguagesBox>
+            <LanguagesBox>
+              <LanguagesName>Python</LanguagesName>
+            </LanguagesBox>
+            <LanguagesBox>
+              <LanguagesName>Go / Rust / Zig</LanguagesName>
+            </LanguagesBox>
+            <LanguagesBox>
+              <LanguagesName>Swift</LanguagesName>
+            </LanguagesBox>
+            <LanguagesBox>
+              <LanguagesName>etc.</LanguagesName>
+            </LanguagesBox>
+          </LanguagesContainer>
+          <CommunicateContainer>
+            <CategoryFont>Communicate</CategoryFont>
+            <CommunicateBox>
+              <ForumName>Forum</ForumName>
+            </CommunicateBox>
+          </CommunicateContainer>
+        </Sidebar>
+        <SearchBar>
+          <ColoredSearch />
+          <SearchGuide type="text" placeholder="#tag, title" />
+        </SearchBar>
+        <ButtonBox>
+          <MyPageButton>profile</MyPageButton>
+          <LogoutButton>logout</LogoutButton>
+        </ButtonBox>
+        <DivBox>
+          <NullBox />
+        </DivBox>
+      </TopBox>
+      <PageSetting isOpen={isSidebarOpen} onClick={closeSidebar} />
+    </>
   );
 }
 
