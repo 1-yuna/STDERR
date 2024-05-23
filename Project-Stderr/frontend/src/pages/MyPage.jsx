@@ -62,6 +62,7 @@ const EditButton = styled.button`
   transition:
     background-color 0.3s,
     color 0.3s;
+
   &:hover {
     background-color: #8145cd;
     color: #ffffff;
@@ -100,9 +101,12 @@ const InfoBox = styled.div`
   }
 `;
 
-const Name = styled.div`
+const Name = styled.input`
   font-size: 30px;
   font-weight: 900;
+  border-bottom: ${(props) =>
+    props.isEditable ? "1px solid #747474" : "none"};
+  background-color: #fff;
 
   @media (max-width: 1070px) {
     font-size: 20px;
@@ -117,10 +121,14 @@ const NotName = styled.div`
   height: 40px;
 `;
 
-const Oneliner = styled.div`
+const Oneliner = styled.input`
   white-space: nowrap;
   font-size: 15px;
   color: #b4b4b4;
+  width: 300px;
+  border-bottom: ${(props) =>
+    props.isEditable ? "1px solid #747474" : "none"};
+  background-color: #fff;
 `;
 
 const ProfileContainer = styled.div`
@@ -212,11 +220,52 @@ const DivBox5 = styled.div`
   height: 70%;
 `;
 
-const AboutBox = styled.div`
+const AboutContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 40%;
   border-radius: 30px;
   background-color: #e4e4e4;
+  padding: 0 0%;
+`;
+
+const AboutBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc(100% - 45px);
+  height: calc(100% - 25px);
+  border: none;
+  outline: none;
+  resize: none;
+`;
+
+const AddressContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 25px;
+`;
+
+const AddressName = styled.div`
+  width: fit-content;
+  height: fit-content;
+`;
+
+const Address = styled.input`
+  flex-grow: 1;
+  width: calc(100% - 110px);
+  height: 100%;
+  margin-left: 10px;
+  border-bottom: ${(props) =>
+    props.isEditable ? "1px solid #747474" : "none"};
+  background-color: #e4e4e4;
+
+  &:disabled {
+    background-color: #e4e4e4;
+  }
 `;
 
 const DivBox6 = styled.div`
@@ -253,6 +302,12 @@ const RankStd = styled.div`
 `;
 
 function MyPage() {
+  const [isEditable, setIsEditable] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditable(!isEditable);
+  };
+
   return (
     <MyPageBackground>
       <Helmet>
@@ -264,15 +319,17 @@ function MyPage() {
         <DivBox1>
           <ProfileCir />
           <InfoBox>
-            <Name>hiya</Name>
+            <Name isEditable={isEditable}></Name>
             <NotName>
-              <Oneliner>kotlin, app engineer</Oneliner>
+              <Oneliner isEditable={isEditable}></Oneliner>
               <GradeSymbolAI size={16} />
             </NotName>
           </InfoBox>
         </DivBox1>
         <DivBox2>
-          <EditButton>Edit</EditButton>
+          <EditButton onClick={handleEditClick}>
+            {isEditable ? "Save" : "Edit"}
+          </EditButton>
         </DivBox2>
       </ProfileContainer>
       <StatContainer>
@@ -300,7 +357,22 @@ function MyPage() {
         <DivBox4>
           <BoxName>About</BoxName>
           <DivBox5>
-            <AboutBox></AboutBox>
+            <AboutContainer>
+              <AboutBox>
+                <AddressContainer>
+                  <AddressName>Git: </AddressName>
+                  <Address isEditable={isEditable} disabled={!isEditable} />
+                </AddressContainer>
+                <AddressContainer>
+                  <AddressName>Tistory: </AddressName>
+                  <Address isEditable={isEditable} disabled={!isEditable} />
+                </AddressContainer>
+                <AddressContainer>
+                  <AddressName>Own Website: </AddressName>
+                  <Address isEditable={isEditable} disabled={!isEditable} />
+                </AddressContainer>
+              </AboutBox>
+            </AboutContainer>
             <DivBox6>
               <BoxName>Rating</BoxName>
               <RatingBox>

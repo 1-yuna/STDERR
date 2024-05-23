@@ -143,7 +143,8 @@ const DivBox = styled.div`
 const ButtonBox = styled.div`
   display: flex;
   justify-content: space-evenly;
-  width: 250px;
+  width: 220px;
+
   @media (max-width: 768px) {
     width: fit-content;
   }
