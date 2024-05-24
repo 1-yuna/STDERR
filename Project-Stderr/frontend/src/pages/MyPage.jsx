@@ -108,6 +108,10 @@ const Name = styled.input`
     props.isEditable ? "1px solid #747474" : "none"};
   background-color: #fff;
 
+  &:disabled {
+    background-color: #fff;
+  }
+
   @media (max-width: 1070px) {
     font-size: 20px;
   }
@@ -129,6 +133,10 @@ const Oneliner = styled.input`
   border-bottom: ${(props) =>
     props.isEditable ? "1px solid #747474" : "none"};
   background-color: #fff;
+
+  &:disabled {
+    background-color: #fff;
+  }
 `;
 
 const ProfileContainer = styled.div`
@@ -319,9 +327,12 @@ function MyPage() {
         <DivBox1>
           <ProfileCir />
           <InfoBox>
-            <Name isEditable={isEditable}></Name>
+            <Name isEditable={isEditable} disabled={!isEditable}></Name>
             <NotName>
-              <Oneliner isEditable={isEditable}></Oneliner>
+              <Oneliner
+                isEditable={isEditable}
+                disabled={!isEditable}
+              ></Oneliner>
               <GradeSymbolAI size={16} />
             </NotName>
           </InfoBox>
