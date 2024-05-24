@@ -7,12 +7,13 @@ import { FaHeart } from "react-icons/fa";
 
 const QuestionBody = styled.div`
   width: 100%;
+  padding: 20px 0;
 `;
 
 const Title = styled.div`
   width: 100%;
-  padding: 10px 30px;
-  font-size: 25px;
+  padding: 10px 10px;
+  font-size: 20px;
   color: #797979;
 `;
 
@@ -23,7 +24,7 @@ const TextBox = styled.div`
   width: 100%;
   height: 200px;
   background-color: white;
-  border-radius: 30px;
+  border-radius: 20px;
   border: 2px solid #d9d9d9;
 `;
 
@@ -129,7 +130,8 @@ const HeartCount = styled.div`
   font-size: 12px;
 `;
 
-function Question() {
+// eslint-disable-next-line react/prop-types
+function Question({ dropBtn }) {
   const [heartClicked, setHeartClicked] = useState(false);
   const [count, setCount] = useState(0);
 
@@ -153,9 +155,11 @@ function Question() {
           <TagBox>#Kotlin</TagBox>
         </FirstBox>
         <SecondBox>
-          <Button>
-            <IoMdArrowDropdown size={40} />
-          </Button>
+          {dropBtn && (
+            <Button>
+              <IoMdArrowDropdown size={40} />
+            </Button>
+          )}
         </SecondBox>
         <ThreeBox>
           <HeartBox>
