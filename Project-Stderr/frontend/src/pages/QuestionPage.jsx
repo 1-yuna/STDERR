@@ -115,7 +115,7 @@ function QuestionPage() {
       <WriteComment name="Comment" />
       <WriteCode />
       <TitleTag name="Tag" />
-      <PostBtn name="Post" />
+      <PostBtn name="Post" route="home" />
     </Background>
   );
 }

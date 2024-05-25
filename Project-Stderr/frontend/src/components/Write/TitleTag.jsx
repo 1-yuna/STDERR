@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const TitleTagBody = styled.div`
   width: 100%;
-  padding: 20px 0;
+  padding: 30px 0;
 `;
 
 const Title = styled.div`

@@ -5,7 +5,7 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 
 const CodeBody = styled.div`
   width: 100%;
-  padding: 20px 0;
+  padding: 30px 0;
 `;
 
 const Title = styled.div`
@@ -31,10 +31,10 @@ const Text = styled.div`
   height: 100%;
   overflow: hidden; //넘어가는 텍스트 hidden
   text-overflow: ellipsis; // 텍스트가 넘칠 경우 줄임표(...)로 표시
-  line-height: 1.5; // 간격
+  line-height: 2; // 간격
   word-wrap: break-word; // 각 단어를 다음 줄로 넘길 수 있도록 허용 (가로 밖으로 벗어남)
   display: -webkit-box;
-  -webkit-line-clamp: ${(props) => (props.expanded ? "none" : "4")}; //라인 수
+  -webkit-line-clamp: ${(props) => (props.expanded ? "none" : "8")}; //라인 수
   -webkit-box-orient: vertical; // 수직으로 배치
 `;
 
@@ -66,20 +66,43 @@ function ViewCode() {
     setExpanded(!expanded); // 텍스트 확장 상태 변경
   };
 
+  const text =
+    " '뭐해?'라는 두 글자에 '네가 보고 싶어' 나의 속마음을 담아 우 이모티콘\n" +
+    "          하나하나 속에 달라지는 내 미묘한 심리를 알까 우 아니 바쁘지 않아\n" +
+    "          nothing no no 잠들어 있지 않아 insomnia-nia-nia 지금 다른 사람과 함\n" +
+    "          께이지 않아 응, 나도 너를 생각 중 우리의 네모 칸은 bloom\n" +
+    "          엄지손가락으로 장미꽃을 피워 향기에 취할 것 같아 우 오직 둘만의 비밀의\n" +
+    "          정원 I feel bloom, I feel bloom, I feel bloom 너에게 한 송이를 더 보내\n" +
+    "          밤샘 작업으로 업데이트 흥미로운이 작품의 지은이 that's me 우 어쩜 이\n" +
+    "          관계의 클라이맥스 '뭐해?'라는 두 글자에 '네가 보고 싶어' 나의 속마음을\n" +
+    "          담아 우 이모티콘 하나하나 속에 달라지는 내 미묘한 심리를 알까 우 아니\n" +
+    "          바쁘지 않아 nothing no no 잠들어 있지 않아 insomnia-nia-nia 지금 다른\n" +
+    "          사람과 함께이지 않아 응, 나도 너를 생각 중 우리의 네모 칸은 bloom\n" +
+    "          엄지손가락으로 장미꽃을 피워 향기에밤샘 작업으로 업데이트 흥미로운 이\n" +
+    "          작품의 지은이 that's me 우 어쩜 이 관계의 클라이맥스 '뭐해?'라는 두\n" +
+    "          글자에 '네가 보고 싶어' 나의 속마음을 담아 우 이모티콘 하나하나 속에\n" +
+    "          달라지는 내 미묘한 심리를 알까 우 아니 바쁘지 않아 nothing no no\n" +
+    "          잠들어 있지 않아 insomnia-nia-nia 지금 다른 사람과 함께이지 않아 응,\n" +
+    "          나도 너를 생각 중 우리의 네모 칸은 bloom 엄지손가락으로 장미꽃을 피워\n" +
+    "          향기에";
+
+  const showButton = expanded || text.split("\n").length > 8;
   return (
     <CodeBody>
       <Title>Code</Title>
       <TextBox expanded={expanded}>
-        <Text expanded={expanded} />
+        <Text expanded={expanded}>{text}</Text>
       </TextBox>
       <CodeButtonBox>
-        <CodeButton onClick={handleExpandClick}>
-          {expanded ? (
-            <IoMdArrowDropup size={40} />
-          ) : (
-            <IoMdArrowDropdown size={40} />
-          )}
-        </CodeButton>
+        {showButton && (
+          <CodeButton onClick={handleExpandClick}>
+            {expanded ? (
+              <IoMdArrowDropup size={40} />
+            ) : (
+              <IoMdArrowDropdown size={40} />
+            )}
+          </CodeButton>
+        )}
       </CodeButtonBox>
     </CodeBody>
   );

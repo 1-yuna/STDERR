@@ -27,15 +27,20 @@ const PostBtnBox = styled.button`
 `;
 
 // eslint-disable-next-line react/prop-types
-function PostBtn({ name }) {
+function PostBtn({ name, route }) {
   const navigate = useNavigate();
-  const PostClick = () => {
-    alert("작성되었습니다. ");
-    navigate("/");
+
+  const handleClick = () => {
+    alert("작성되었습니다.");
+    if (route === "home") {
+      navigate("/");
+    } else if (route === "before") {
+      navigate(-1);
+    }
   };
   return (
     <PostBtnBody>
-      <PostBtnBox onClick={PostClick}>{name}</PostBtnBox>
+      <PostBtnBox onClick={handleClick}>{name}</PostBtnBox>
     </PostBtnBody>
   );
 }

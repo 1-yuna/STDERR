@@ -5,7 +5,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 const CodeBody = styled.div`
   width: 100%;
-  padding: 20px 0;
+  padding: 30px 0;
 `;
 
 const Title = styled.div`
@@ -58,20 +58,13 @@ const CodeButton = styled.button`
 `;
 
 // eslint-disable-next-line react/prop-types
-function WriteCode({ dropBtn }) {
+function WriteCode() {
   return (
     <CodeBody>
       <Title>Code</Title>
       <TextBox>
         <Text type="text" placeholder="Comments.." />
       </TextBox>
-      <CodeButtonBox>
-        {dropBtn && ( // dropBtn이 true일 때만 아래 코드가 렌더링됩니다.
-          <CodeButton>
-            <IoMdArrowDropdown size={40} />
-          </CodeButton>
-        )}
-      </CodeButtonBox>
     </CodeBody>
   );
 }
