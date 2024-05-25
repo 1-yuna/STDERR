@@ -38,6 +38,7 @@ const Text = styled.textarea`
   }
 `;
 
+// eslint-disable-next-line react/prop-types
 function WriteComment({ name }) {
   return (
     <CommentBody>
