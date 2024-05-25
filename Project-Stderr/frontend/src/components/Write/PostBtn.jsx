@@ -31,11 +31,14 @@ function PostBtn({ name, route }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    alert("작성되었습니다.");
     if (route === "home") {
+      alert("작성되었습니다.");
       navigate("/");
     } else if (route === "before") {
+      alert("작성되었습니다.");
       navigate(-1);
+    } else if (route === "replyPage") {
+      navigate("/reply");
     }
   };
   return (
