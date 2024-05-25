@@ -284,6 +284,10 @@ function TopBar() {
     setIsSidebarOpen(false);
   };
 
+  const gotoHome = () => {
+    window.location.href = "http://localhost:5173";
+  };
+
   return (
     <>
       <TopBox>
@@ -297,7 +301,7 @@ function TopBar() {
           </LogoBox>
         </DivBox>
         <Sidebar isOpen={isSidebarOpen}>
-          <HomeButton>
+          <HomeButton onClick={gotoHome}>
             <ColoredHome size={24} />
             <Home>Home</Home>
           </HomeButton>
