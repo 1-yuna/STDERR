@@ -6,10 +6,11 @@ import Dropdown from "../components/Dropdown/index.jsx";
 import styled from "styled-components";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { MdOutlineArrowDropUp } from "react-icons/md";
-import TitleTag from "../components/ContentElements/TitleTag.jsx";
-import Comment from "../components/ContentElements/Comment.jsx";
-import Code from "../components/ContentElements/Code.jsx";
-import Question from "../components/ContentElements/Question.jsx";
+import TitleTag from "../components/Write/TitleTag.jsx";
+import WriteComment from "../components/Write/WriteComment.jsx";
+import WriteCode from "../components/Write/WriteCode.jsx";
+import PostBtn from "../components/Write/PostBtn.jsx";
+
 const TopBox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -111,9 +112,10 @@ function QuestionPage() {
         <RuleText>{str}</RuleText>
       </RuleBox>
       <TitleTag name="Title" />
-      <Comment />
-      <Code dropBtn="dropBtn" />
+      <WriteComment name="Comment" />
+      <WriteCode />
       <TitleTag name="Tag" />
+      <PostBtn name="Post" />
     </Background>
   );
 }

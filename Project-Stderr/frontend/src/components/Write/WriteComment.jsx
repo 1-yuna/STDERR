@@ -38,10 +38,10 @@ const Text = styled.textarea`
   }
 `;
 
-function Comment() {
+function WriteComment({ name }) {
   return (
     <CommentBody>
-      <Title>Comment</Title>
+      <Title>{name}</Title>
       <TextBox>
         <Text type="text" placeholder="Comments.." />
       </TextBox>
@@ -49,4 +49,4 @@ function Comment() {
   );
 }
 
-export default Comment;
+export default WriteComment;

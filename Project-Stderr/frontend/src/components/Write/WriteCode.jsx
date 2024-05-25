@@ -58,7 +58,7 @@ const CodeButton = styled.button`
 `;
 
 // eslint-disable-next-line react/prop-types
-function Code({ dropBtn }) {
+function WriteCode({ dropBtn }) {
   return (
     <CodeBody>
       <Title>Code</Title>
@@ -76,4 +76,4 @@ function Code({ dropBtn }) {
   );
 }
 
-export default Code;
+export default WriteCode;
