@@ -2,7 +2,7 @@
 import React from "react";
 import Background from "../components/Background";
 import TopBar from "../components/Bar/TopBar.jsx";
-import Post from "../components/Post/Post.jsx";
+import Post from "../components/View/Post.jsx";
 import styled from "styled-components";
 
 const CategoryBox = styled.div`

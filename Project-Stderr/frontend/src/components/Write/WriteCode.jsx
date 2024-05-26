@@ -5,12 +5,13 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 const CodeBody = styled.div`
   width: 100%;
+  padding: 30px 0;
 `;
 
 const Title = styled.div`
   width: 100%;
-  padding: 10px 30px;
-  font-size: 25px;
+  padding: 10px 10px;
+  font-size: 20px;
   color: #797979;
 `;
 
@@ -21,7 +22,7 @@ const TextBox = styled.div`
   width: 100%;
   height: 300px;
   background-color: #f7f7f7;
-  border-radius: 30px;
+  border-radius: 20px;
 `;
 
 const Text = styled.textarea`
@@ -56,20 +57,16 @@ const CodeButton = styled.button`
   border-radius: 0 0 10px 10px;
 `;
 
-function Code() {
+// eslint-disable-next-line react/prop-types
+function WriteCode() {
   return (
     <CodeBody>
       <Title>Code</Title>
       <TextBox>
         <Text type="text" placeholder="Comments.." />
       </TextBox>
-      <CodeButtonBox>
-        <CodeButton>
-          <IoMdArrowDropdown size={40} />
-        </CodeButton>
-      </CodeButtonBox>
     </CodeBody>
   );
 }
 
-export default Code;
+export default WriteCode;

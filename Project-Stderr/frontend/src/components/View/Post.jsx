@@ -43,13 +43,13 @@ const CommentBox = styled.div`
   height: 60px;
   font-size: 14px;
   text-align: left;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.5;
-  word-wrap: break-word;
+  overflow: hidden; //넘어가는 텍스트 hidden
+  text-overflow: ellipsis; // 텍스트가 넘칠 경우 줄임표(...)로 표시
+  line-height: 1.5; // 간격
+  word-wrap: break-word; // 각 단어를 다음 줄로 넘길 수 있도록 허용 (가로 밖으로 벗어남)
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; //라인 수
+  -webkit-box-orient: vertical; // 수직으로 배치
 `;
 
 const Tagline = styled.div`

@@ -4,12 +4,13 @@ import styled from "styled-components";
 
 const CommentBody = styled.div`
   width: 100%;
+  padding: 30px 0;
 `;
 
 const Title = styled.div`
   width: 100%;
-  padding: 10px 30px;
-  font-size: 25px;
+  padding: 10px 10px;
+  font-size: 20px;
   color: #797979;
 `;
 
@@ -20,7 +21,7 @@ const TextBox = styled.div`
   width: 100%;
   height: 300px;
   background-color: white;
-  border-radius: 30px;
+  border-radius: 20px;
   border: 2px solid #d9d9d9;
 `;
 
@@ -37,10 +38,11 @@ const Text = styled.textarea`
   }
 `;
 
-function Comment() {
+// eslint-disable-next-line react/prop-types
+function WriteComment({ name }) {
   return (
     <CommentBody>
-      <Title>Comment</Title>
+      <Title>{name}</Title>
       <TextBox>
         <Text type="text" placeholder="Comments.." />
       </TextBox>
@@ -48,4 +50,4 @@ function Comment() {
   );
 }
 
-export default Comment;
+export default WriteComment;

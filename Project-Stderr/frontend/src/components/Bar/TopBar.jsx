@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import HamburgerBar from "./HamburgerBar.jsx";
 import { FaSearch } from "react-icons/fa";
-import { IoMdHome } from "react-icons/io";
+import { IoMdArrowBack, IoMdHome } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const Logo = styled.img`
   //margin-right: 40px;
@@ -214,11 +215,23 @@ const ForumName = styled.button`
   }
 `;
 
-function TopBar() {
+const BackBtn = styled(IoMdArrowBack)`
+  color: #8145cd;
+  font-size: 30px;
+`;
+
+// eslint-disable-next-line react/prop-types
+function TopBar({ isBackBtn }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1); // 이전 페이지로 이동
   };
 
   return (
@@ -268,8 +281,14 @@ function TopBar() {
         <SearchGuide type="text" placeholder="#tag, title" />
       </SearchBar>
       <DivBox>
-        <MyPageButton>profile</MyPageButton>
-        <LogoutButton>logout</LogoutButton>
+        {isBackBtn ? (
+          <BackBtn onClick={handleGoBack} />
+        ) : (
+          <>
+            <MyPageButton>profile</MyPageButton>
+            <LogoutButton>logout</LogoutButton>
+          </>
+        )}
       </DivBox>
       <DivBox>
         <NullBox />
