@@ -143,8 +143,10 @@ const DivBox = styled.div`
 
 const ButtonBox = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: ${(props) =>
+    props.isBackBtn ? "flex-end" : "space-between"};
   width: 220px;
+  padding: 0 50px 0 0;
 
   @media (max-width: 768px) {
     width: fit-content;
@@ -277,6 +279,7 @@ const BackBtn = styled(IoMdArrowBack)`
   color: #8145cd;
   font-size: 30px;
 `;
+// eslint-disable-next-line react/prop-types
 function TopBar({ isBackBtn }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -347,15 +350,15 @@ function TopBar({ isBackBtn }) {
           <ColoredSearch />
           <SearchGuide type="text" placeholder="#tag, title" />
         </SearchBar>
-        <ButtonBox>
-        {isBackBtn ? (
-          <BackBtn onClick={handleGoBack} />
-        ) : (
-          <>
-            <MyPageButton>profile</MyPageButton>
-            <LogoutButton>logout</LogoutButton>
-          </>
-        )}
+        <ButtonBox isBackBtn={isBackBtn}>
+          {isBackBtn ? (
+            <BackBtn onClick={handleGoBack} />
+          ) : (
+            <>
+              <MyPageButton>profile</MyPageButton>
+              <LogoutButton>logout</LogoutButton>
+            </>
+          )}
         </ButtonBox>
         <DivBox>
           <NullBox />

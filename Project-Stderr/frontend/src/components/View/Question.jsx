@@ -68,6 +68,11 @@ const TagBox = styled.div`
   color: #8145cd;
   text-align: center;
   border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  transition: background-color 0.3s;
 `;
 
 const SecondBox = styled.div`

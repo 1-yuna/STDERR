@@ -17,7 +17,7 @@ const PostBtnBox = styled.button`
   width: 200px;
   padding: 8px 0;
   color: #8145cd;
-  border: 1px solid #8145cd;
+  border: 2px solid #8145cd;
   border-radius: 12px;
 
   &:hover {

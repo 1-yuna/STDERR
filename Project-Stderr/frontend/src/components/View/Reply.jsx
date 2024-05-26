@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-import ViewReply from "./ViewReply.jsx";
 import ViewCode from "./ViewCode.jsx";
 
 const ReplyBox = styled.div`
@@ -177,9 +176,9 @@ function Reply() {
         <HeartBox>
           <StyledButton onClick={handleHeartClick}>
             {heartClicked ? (
-              <FilledHeartIcon onClick={handleHeartClick} size={30} />
+              <FilledHeartIcon onClick={handleHeartClick} size={24} />
             ) : (
-              <HeartIcon onClick={handleHeartClick} size={30} />
+              <HeartIcon onClick={handleHeartClick} size={24} />
             )}
           </StyledButton>
           <HeartCount>{count}</HeartCount>
@@ -188,7 +187,6 @@ function Reply() {
       <TextBox expanded={expanded}>
         <Text expanded={expanded}>{text}</Text>
       </TextBox>
-      {expanded && <ViewReply />}
       {expanded && <ViewCode />}
       <더보기 onClick={handleExpandClick}>
         {expanded ? "닫기" : "더보기"}
