@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import HamburgerBar from "./HamburgerBar.jsx";
 import { FaSearch } from "react-icons/fa";
-import { IoMdArrowBack, IoMdHome } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { IoMdHome } from "react-icons/io";
+// import { IoMdArrowBack } from "react-icons/io";
+// import { useNavigate } from "react-router-dom";
 
 const LogoBox = styled.button`
   display: flex;
@@ -26,17 +27,17 @@ const Logo = styled.img`
   }
 `;
 
-const NullBox = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 120px;
-  height: 35px;
-
-  @media (max-width: 768px) {
-    width: 0;
-    height: 0;
-  }
-`;
+// const NullBox = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   width: 120px;
+//   height: 35px;
+//
+//   @media (max-width: 768px) {
+//     width: 0;
+//     height: 0;
+//   }
+// `;
 
 const TopBox = styled.div`
   display: flex;
@@ -51,7 +52,12 @@ const TopBox = styled.div`
   color: white;
   z-index: 1000;
   border-bottom: 1px solid #d9d9d9;
-  padding: 0 21px;
+  padding-left: 21px;
+  padding-right: 10%;
+
+  @media (max-width: 768px) {
+    padding-right: 21px;
+  }
 `;
 
 const ColoredSearch = styled(FaSearch)`
@@ -276,10 +282,11 @@ const PageSetting = styled.div`
   z-index: 999;
 `;
 
-const BackBtn = styled(IoMdArrowBack)`
-  color: #8145cd;
-  font-size: 30px;
-`;
+// const BackBtn = styled(IoMdArrowBack)`
+//   color: #8145cd;
+//   font-size: 30px;
+//   cursor: pointer;
+// `;
 
 // eslint-disable-next-line react/prop-types
 function TopBar({ isBackBtn }) {
@@ -297,11 +304,11 @@ function TopBar({ isBackBtn }) {
     window.location.href = "http://localhost:5173";
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleGoBack = () => {
-    navigate(-1); // 이전 페이지로 이동
-  };
+  // const handleGoBack = () => {
+  //   navigate(-1); // 이전 페이지로 이동
+  // };
 
   return (
     <>
@@ -362,9 +369,9 @@ function TopBar({ isBackBtn }) {
             </>
           )}
         </ButtonBox>
-        <DivBox>
-          <NullBox>{isBackBtn && <BackBtn onClick={handleGoBack} />}</NullBox>
-        </DivBox>
+        {/*<DivBox>*/}
+        {/*  <NullBox>{isBackBtn && <BackBtn onClick={handleGoBack} />}</NullBox>*/}
+        {/*</DivBox>*/}
       </TopBox>
       <PageSetting isOpen={isSidebarOpen} onClick={closeSidebar} />
     </>
