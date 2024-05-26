@@ -9,6 +9,7 @@ import QuestionPage from "./pages/QuestionPage.jsx";
 import ReplyPage from "./pages/ReplyPage.jsx";
 import ViewPage from "./pages/ViewPage.jsx";
 import MyPage from "./pages/MyPage.jsx";
+import JoinPage from "./pages/JoinPage.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/reply" element={<ReplyPage />} />
           <Route path="/view" element={<ViewPage />} />
           <Route path="/my" element={<MyPage />} />
+          <Route path="/join" element={<JoinPage />} />
           {/*path="/board/:category_id"*/}
           {/*path="/reply/:category_id/:question_id"*/}
           {/*path="/view/:category_id/:question_id"*/}
