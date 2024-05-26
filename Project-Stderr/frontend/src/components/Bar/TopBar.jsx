@@ -27,6 +27,8 @@ const Logo = styled.img`
 `;
 
 const NullBox = styled.div`
+  display: flex;
+  justify-content: center;
   width: 45px;
   height: 35px;
 
@@ -143,10 +145,8 @@ const DivBox = styled.div`
 
 const ButtonBox = styled.div`
   display: flex;
-  justify-content: ${(props) =>
-    props.isBackBtn ? "flex-end" : "space-between"};
+  justify-content: space-evenly;
   width: 220px;
-  padding: 0 50px 0 0;
 
   @media (max-width: 768px) {
     width: fit-content;
@@ -350,9 +350,9 @@ function TopBar({ isBackBtn }) {
           <ColoredSearch />
           <SearchGuide type="text" placeholder="#tag, title" />
         </SearchBar>
-        <ButtonBox isBackBtn={isBackBtn}>
+        <ButtonBox>
           {isBackBtn ? (
-            <BackBtn onClick={handleGoBack} />
+            <></>
           ) : (
             <>
               <MyPageButton>profile</MyPageButton>
@@ -361,7 +361,7 @@ function TopBar({ isBackBtn }) {
           )}
         </ButtonBox>
         <DivBox>
-          <NullBox />
+          <NullBox>{isBackBtn && <BackBtn onClick={handleGoBack} />}</NullBox>
         </DivBox>
       </TopBox>
       <PageSetting isOpen={isSidebarOpen} onClick={closeSidebar} />
