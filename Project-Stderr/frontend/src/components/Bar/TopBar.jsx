@@ -29,7 +29,7 @@ const Logo = styled.img`
 const NullBox = styled.div`
   display: flex;
   justify-content: center;
-  width: 45px;
+  width: 120px;
   height: 35px;
 
   @media (max-width: 768px) {
@@ -145,8 +145,8 @@ const DivBox = styled.div`
 
 const ButtonBox = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  width: 220px;
+  justify-content: space-between;
+  width: 160px;
 
   @media (max-width: 768px) {
     width: fit-content;
@@ -275,10 +275,12 @@ const PageSetting = styled.div`
   height: 100%;
   z-index: 999;
 `;
+
 const BackBtn = styled(IoMdArrowBack)`
   color: #8145cd;
   font-size: 30px;
 `;
+
 // eslint-disable-next-line react/prop-types
 function TopBar({ isBackBtn }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
