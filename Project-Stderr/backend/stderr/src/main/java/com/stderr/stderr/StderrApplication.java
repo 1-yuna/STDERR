@@ -1,13 +1,13 @@
-package com.example.backend;
+package com.stderr.stderr;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BackendApplication {
+public class StderrApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BackendApplication.class, args);
+		SpringApplication.run(StderrApplication.class, args);
 	}
 
 }

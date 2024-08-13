@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <annotationProcessing>
-      <profile name="Gradle Imported" enabled="true">
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.32/17d46b3e205515e1e8efd3ee4d57ce8018914163/lombok-1.18.32.jar" />
-        </processorPath>
-        <module name="com.example.backend.main" />
-      </profile>
-    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="com.stderr.stderr.main" target="17" />
+      <module name="com.stderr.stderr.test" target="17" />
+      <module name="Project-Stderr.backend" target="17" />
+      <module name="Project-Stderr.backend.main" target="17" />
+      <module name="Project-Stderr.backend.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-parameters" />
   </component>
 </project>
