@@ -8,6 +8,8 @@ public class StderrApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StderrApplication.class, args);
+
+				System.out.println("park");
 	}
 
 }
