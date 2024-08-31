@@ -1,8 +1,9 @@
-package com.stderr.stderr.category;
+package com.stderr.stderr.Config;
 
+import com.stderr.stderr.Entity.Category;
+import com.stderr.stderr.Repository.CategoryRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

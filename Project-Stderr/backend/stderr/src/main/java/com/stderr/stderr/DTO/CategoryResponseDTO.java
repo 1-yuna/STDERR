@@ -1,7 +1,5 @@
-package com.stderr.stderr.category;
+package com.stderr.stderr.DTO;
 
-import com.stderr.stderr.post.PostResponseDTO;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -9,7 +7,7 @@ import java.util.List;
 
 @Getter
 @RequiredArgsConstructor(staticName = "of")
-public class CategoryDTO {
+public class CategoryResponseDTO {
     private final Long categoryId;
     private final String categoryName;
     private final Integer postCount;

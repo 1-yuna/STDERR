@@ -1,9 +1,13 @@
-package com.stderr.stderr.post;
+package com.stderr.stderr.Controller;
 
-import com.stderr.stderr.category.Category;
-import com.stderr.stderr.category.CategoryRepository;
-import com.stderr.stderr.tag.Tag;
-import com.stderr.stderr.tag.TagRepository;
+import com.stderr.stderr.DTO.PostRequestDTO;
+import com.stderr.stderr.DTO.PostResponseDTO;
+import com.stderr.stderr.Entity.Post;
+import com.stderr.stderr.Repository.PostRepository;
+import com.stderr.stderr.Entity.Category;
+import com.stderr.stderr.Repository.CategoryRepository;
+import com.stderr.stderr.Entity.Tag;
+import com.stderr.stderr.Repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

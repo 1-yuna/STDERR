@@ -1,14 +1,10 @@
-package com.stderr.stderr.tag;
+package com.stderr.stderr.Entity;
 
 
-import com.stderr.stderr.post.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Setter

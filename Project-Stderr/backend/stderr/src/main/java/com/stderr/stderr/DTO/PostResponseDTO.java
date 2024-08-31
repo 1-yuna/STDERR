@@ -1,6 +1,6 @@
-package com.stderr.stderr.post;
+package com.stderr.stderr.DTO;
 
-import com.stderr.stderr.tag.Tag;
+import com.stderr.stderr.Entity.Tag;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

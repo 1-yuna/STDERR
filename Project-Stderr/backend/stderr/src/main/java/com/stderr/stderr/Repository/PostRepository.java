@@ -1,5 +1,6 @@
-package com.stderr.stderr.post;
+package com.stderr.stderr.Repository;
 
+import com.stderr.stderr.Entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

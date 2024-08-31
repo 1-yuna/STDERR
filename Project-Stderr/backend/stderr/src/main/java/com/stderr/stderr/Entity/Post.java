@@ -1,7 +1,5 @@
-package com.stderr.stderr.post;
+package com.stderr.stderr.Entity;
 
-import com.stderr.stderr.category.Category;
-import com.stderr.stderr.tag.Tag;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,9 +7,7 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

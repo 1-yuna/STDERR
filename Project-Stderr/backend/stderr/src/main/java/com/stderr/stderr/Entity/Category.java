@@ -1,4 +1,4 @@
-package com.stderr.stderr.category;
+package com.stderr.stderr.Entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

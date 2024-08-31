@@ -1,8 +1,11 @@
-package com.stderr.stderr.category;
+package com.stderr.stderr.Controller;
 
-import com.stderr.stderr.post.Post;
-import com.stderr.stderr.post.PostResponseDTO;
-import com.stderr.stderr.post.PostRepository;
+import com.stderr.stderr.DTO.CategoryResponseDTO;
+import com.stderr.stderr.Entity.Category;
+import com.stderr.stderr.Repository.CategoryRepository;
+import com.stderr.stderr.Entity.Post;
+import com.stderr.stderr.DTO.PostResponseDTO;
+import com.stderr.stderr.Repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +22,7 @@ public class CategoryController {
 
     // 카테고리 별로 게시물 불러오기
     @GetMapping("/api/post/{categoryId}")
-     public CategoryDTO getCategory(@PathVariable Long categoryId) {
+     public CategoryResponseDTO getCategory(@PathVariable Long categoryId) {
 
         // 게시물 조회
         List<Post> posts = postRepository.findAllByCategory_CategoryId(categoryId);
@@ -51,7 +54,7 @@ public class CategoryController {
                 .collect(Collectors.toList());
 
         // CategoryDTO 생성 및 반환
-        return CategoryDTO.of(id, categoryName,postCount,postResponseDTOs);
+        return CategoryResponseDTO.of(id, categoryName,postCount,postResponseDTOs);
 
 
 
