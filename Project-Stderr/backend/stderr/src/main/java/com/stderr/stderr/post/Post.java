@@ -1,12 +1,18 @@
 package com.stderr.stderr.post;
 
 import com.stderr.stderr.category.Category;
+import com.stderr.stderr.tag.Tag;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -16,20 +22,28 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name ="post_id")
+    private Long postId;
 
     private String title;
     private String content;
-    private String Code;
+    private String code;
     private Integer likes;
     private Integer reply;
+
+    @CreationTimestamp
     private LocalDateTime createdAt;  // 생성 날짜
     private LocalDateTime updatedAt;  // 업데이트 날짜
 
     @ManyToOne
-    @JoinColumn(name="categoryId", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name="category_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Category category;
-    // private Long userId = 1L;
+
+    @ManyToMany
+    @JoinTable(name = "post_tag", joinColumns = @JoinColumn(name = "post_id"),
+    inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private Set<Tag> tags = new HashSet<>();
+
 
 }
 

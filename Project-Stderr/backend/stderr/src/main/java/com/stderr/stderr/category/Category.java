@@ -14,7 +14,8 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name="category_id")
+    private Long categoryId;
 
     private String categoryName;
     private Integer postCount;

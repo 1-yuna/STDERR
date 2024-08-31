@@ -1,14 +1,17 @@
 package com.stderr.stderr.category;
 
+import com.stderr.stderr.post.PostResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @RequiredArgsConstructor(staticName = "of")
-public class CategoryDTO<D> {
-    private final Long id;
+public class CategoryDTO {
+    private final Long categoryId;
     private final String categoryName;
-    private final Integer boardCount;
-    private final D posts;  // 제네릭 타입 D를 사용
+    private final Integer postCount;
+    private final List<PostResponseDTO> posts;  // 제네릭 타입 D를 사용
 }

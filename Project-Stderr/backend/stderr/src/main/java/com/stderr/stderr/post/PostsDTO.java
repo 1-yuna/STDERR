@@ -9,14 +9,14 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
-public class PostDTO {
+public class PostsDTO {
     public String title;
     public String content;
     public Integer like;
     public Integer reply;
     public List<String> tags;
 
-    public PostDTO(String a, String b, Integer c, Integer d, List<String> tag){  // constructor
+    public PostsDTO(String a, String b, Integer c, Integer d, List<String> tag){  // constructor
         this.title = a;
         this.content = b;
         this.like = c;
