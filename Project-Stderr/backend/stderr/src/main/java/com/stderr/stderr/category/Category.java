@@ -11,9 +11,12 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Category {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String CategoryName;
-    private Integer boardCount;
+
+    private String categoryName;
+    private Integer postCount;
 
 }

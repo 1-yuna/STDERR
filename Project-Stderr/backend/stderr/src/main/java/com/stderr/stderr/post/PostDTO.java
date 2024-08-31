@@ -1,4 +1,4 @@
-package com.stderr.stderr.board;
+package com.stderr.stderr.post;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,18 +9,18 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
-public class BoardDTO {
+public class PostDTO {
     public String title;
     public String content;
     public Integer like;
     public Integer reply;
-    public List<String> tag;
+    public List<String> tags;
 
-    public BoardDTO(String a, String b, Integer c, Integer d, List<String> tag){  // constructor
+    public PostDTO(String a, String b, Integer c, Integer d, List<String> tag){  // constructor
         this.title = a;
         this.content = b;
         this.like = c;
         this.reply =d;
-        this.tag = tag;
+        this.tags = tag;
     }
 }

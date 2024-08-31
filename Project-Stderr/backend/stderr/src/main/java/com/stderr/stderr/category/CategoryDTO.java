@@ -10,5 +10,5 @@ public class CategoryDTO<D> {
     private final Long id;
     private final String categoryName;
     private final Integer boardCount;
-    private final D data;  // 제네릭 타입 D를 사용
+    private final D posts;  // 제네릭 타입 D를 사용
 }

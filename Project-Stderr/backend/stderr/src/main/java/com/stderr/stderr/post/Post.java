@@ -1,4 +1,4 @@
-package com.stderr.stderr.board;
+package com.stderr.stderr.post;
 
 import com.stderr.stderr.category.Category;
 import jakarta.persistence.*;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Board {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
