@@ -21,7 +21,7 @@ public class CategoryController {
     private final PostRepository postRepository;
 
     // 카테고리 별로 게시물 불러오기
-    @GetMapping("/api/post/{categoryId}")
+    @GetMapping("/api/category/{categoryId}")
      public CategoryResponseDTO getCategory(@PathVariable Long categoryId) {
 
         // 게시물 조회
@@ -46,9 +46,9 @@ public class CategoryController {
                         post.getPostId(),
                         post.getTitle(),
                         post.getContent(),
+                        post.getCode(),
                         post.getLikes(),
                         post.getReply(),
-                        post.getCode(),
                         post.getTags()
                 ))
                 .collect(Collectors.toList());

@@ -12,13 +12,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class PostController {
 
@@ -57,7 +56,7 @@ public class PostController {
             tags.add(tag);  // 유저가 입력한 모든 태그 저장
         }
 
-        // requset 저장
+        // 저장
         Post post = new Post();
         post.setTitle(postRequestDTO.getTitle());
         post.setContent(postRequestDTO.getContent());
@@ -73,13 +72,37 @@ public class PostController {
                 post.getPostId(),
                 post.getTitle(),
                 post.getContent(),
+                post.getCode(),
                 post.getLikes(),
                 post.getReply(),
-                post.getCode(),
                 post.getTags()
         );
 
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+
+    }
+
+    @GetMapping("api/post/{postId}")
+    public ResponseEntity<PostResponseDTO> getPost(@PathVariable long postId){
+        Optional<Post> result = postRepository.findById(postId);
+        if (result.isPresent()) {
+            Post post = result.get();
+            System.out.println(post);
+
+            PostResponseDTO responseDTO = new PostResponseDTO(
+                    post.getPostId(),
+                    post.getTitle(),
+                    post.getContent(),
+                    post.getCode(),
+                    post.getLikes(),
+                    post.getReply(),
+                    post.getTags()
+            );
+
+            return ResponseEntity.ok(responseDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // HTTP 404 Not Found 응답
+        }
 
     }
 }
