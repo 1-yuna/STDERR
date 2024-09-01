@@ -35,10 +35,8 @@ public class CategoryController {
         String categoryName = category.getCategoryName();
         Long id = category.getCategoryId();
 
-        // 게시물 수 계산
-        Integer postCount = posts.size();
-        category.setPostCount(postCount);
-        categoryRepository.save(category);
+        // 게시물 수
+        Integer postCount = category.getPostCount();
 
         //response 응답
         List<PostResponseDTO> postResponseDTOs = posts.stream()
