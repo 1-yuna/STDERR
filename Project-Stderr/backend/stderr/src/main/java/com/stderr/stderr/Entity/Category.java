@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Setter
@@ -19,5 +22,9 @@ public class Category {
 
     private String categoryName;
     private Integer postCount;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "category")
+    private List<Post> posts = new ArrayList<>();
 
 }

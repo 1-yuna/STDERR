@@ -32,7 +32,7 @@ public class Post {
     private LocalDateTime updatedAt;  // 업데이트 날짜
 
     @ManyToOne
-    @JoinColumn(name="category_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name="category_id", foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private Category category;
 
     @ManyToMany
