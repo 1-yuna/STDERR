@@ -81,7 +81,7 @@ public class PostController {
                 post.getTags()
         );
 
-        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+        return ResponseEntity.ok(responseDTO);
 
     }
 
@@ -141,7 +141,7 @@ public class PostController {
 
             post.setCategory(category);
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // 카테고리 ID가 유효하지 않으면 400 오류 반환
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();// 카테고리 ID가 유효하지 않으면 400 오류 반환
         }
 
         // tag 추가
@@ -172,6 +172,31 @@ public class PostController {
         postRepository.save(post);
 
         return ResponseEntity.ok(post);
+    }
+
+    // 게시물 삭제
+    @DeleteMapping("api/post/{postId}")
+    public ResponseEntity<String> deletePost(@PathVariable long postId){
+
+        // 게시불 불러오기
+        Optional<Post> postOptional = postRepository.findById(postId);
+        if(postOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        Post post = postOptional.get();
+
+        if(postRepository.existsById(postId)){
+            // 게시물 수 감소
+            if (post.getCategory() != null) {
+                updatePostCountForCategory(post.getCategory(), -1);
+            }
+            // 게시물 삭제
+            postRepository.deleteById(postId);
+            return ResponseEntity.ok("success");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+
+        }
     }
 
     // 카테고리 게시물 수 업데이트
