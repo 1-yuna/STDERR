@@ -54,7 +54,5 @@ public class CategoryController {
         // CategoryDTO 생성 및 반환
         return CategoryResponseDTO.of(id, categoryName,postCount,postResponseDTOs);
 
-
-
     }
 }

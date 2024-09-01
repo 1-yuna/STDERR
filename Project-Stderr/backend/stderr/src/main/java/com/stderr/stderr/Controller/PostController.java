@@ -90,10 +90,10 @@ public class PostController {
     public ResponseEntity<PostResponseDTO> getPost(@PathVariable long postId){
 
         // 게시글 조회
-        Optional<Post> result = postRepository.findById(postId);
+        Optional<Post> postOptional = postRepository.findById(postId);
 
-        if (result.isPresent()) {
-            Post post = result.get();
+        if (postOptional.isPresent()) {
+            Post post = postOptional.get();
             System.out.println(post);
 
             PostResponseDTO responseDTO = new PostResponseDTO(
@@ -118,7 +118,7 @@ public class PostController {
 
         // 게시물 조회
         Optional<Post> postOptional = postRepository.findById(postId);
-        if(!postOptional.isPresent()) {
+        if(postOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
@@ -192,7 +192,7 @@ public class PostController {
             }
             // 게시물 삭제
             postRepository.deleteById(postId);
-            return ResponseEntity.ok("success");
+            return ResponseEntity.ok("successfully");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
