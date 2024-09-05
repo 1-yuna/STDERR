@@ -7,9 +7,9 @@ import styled from "styled-components";
 const PageSetting = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   width: 100%;
-  height: 100%;
+  height: 600px;
 `;
 
 const DivBox1 = styled.div`
@@ -20,10 +20,10 @@ const DivBox1 = styled.div`
 const DivBox2 = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 0 20px;
   width: 100%;
-  height: 40%;
+  height: 23%;
 `;
 
 const CloudFlareBox = styled.div`

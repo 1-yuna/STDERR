@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
+import { MdEditSquare } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import ViewCode from "./ViewCode.jsx";
 
 const ReplyBox = styled.div`
@@ -48,8 +50,11 @@ const ReplyAtime = styled.div`
 const DivBox = styled.div`
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   width: fit-content;
   height: 100%;
+  color: #8145cd;
+  font-size: 25px;
 `;
 
 const ProfileName = styled.button`
@@ -57,10 +62,10 @@ const ProfileName = styled.button`
   font-size: 20px;
 `;
 
-const HeartBox = styled.button`
+const ButtonBox = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
   width: 100px;
   height: 100%;
   font-size: 20px;
@@ -112,6 +117,12 @@ const StyledButton = styled.button`
   transition: color 0.3s;
 `;
 
+const Button = styled.button`
+  align-items: center;
+  width: 35px;
+  height: fit-content;
+`;
+
 const HeartIcon = styled(FaRegHeart)`
   color: #8145cd;
 `;
@@ -119,6 +130,18 @@ const HeartIcon = styled(FaRegHeart)`
 const FilledHeartIcon = styled(FaHeart)`
   color: ${(props) => (props.isActive ? "#8145cd" : "#8145cd")};
   transition: color 0.3s;
+`;
+
+const ModifyIcon = styled(MdEditSquare)`
+  color: #8145cd;
+  width: 27px;
+  height: 27px;
+`;
+
+const DeleteIcon = styled(MdDelete)`
+  color: #8145cd;
+  width: 27px;
+  height: 27px;
 `;
 
 const HeartCount = styled.div`
@@ -173,16 +196,27 @@ function Reply() {
             <ReplyAtime>약 3시간 전</ReplyAtime>
           </ProfileNameBox>
         </DivBox>
-        <HeartBox>
-          <StyledButton onClick={handleHeartClick}>
-            {heartClicked ? (
-              <FilledHeartIcon onClick={handleHeartClick} size={24} />
-            ) : (
-              <HeartIcon onClick={handleHeartClick} size={24} />
-            )}
-          </StyledButton>
-          <HeartCount>{count}</HeartCount>
-        </HeartBox>
+        <ButtonBox>
+          <DivBox>
+            <Button>
+              <ModifyIcon />
+            </Button>
+            |
+            <Button>
+              <DeleteIcon />
+            </Button>
+          </DivBox>
+          <DivBox>
+            <StyledButton onClick={handleHeartClick}>
+              {heartClicked ? (
+                <FilledHeartIcon onClick={handleHeartClick} size={24} />
+              ) : (
+                <HeartIcon onClick={handleHeartClick} size={24} />
+              )}
+            </StyledButton>
+            <HeartCount>{count}</HeartCount>
+          </DivBox>
+        </ButtonBox>
       </ProfileContainer>
       <TextBox expanded={expanded}>
         <Text expanded={expanded}>{text}</Text>
