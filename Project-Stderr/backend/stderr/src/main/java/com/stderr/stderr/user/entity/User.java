@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.List;
 
 @Entity
 @Setter
@@ -28,6 +31,7 @@ public class User {
     private String git_address;
     private String tistory_address;
     private String user_web_address;
+
 
 
 }
