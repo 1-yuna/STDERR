@@ -87,7 +87,7 @@ public class PostController {
 
     // 게시물 상세정보
     @GetMapping("api/post/{postId}")
-    public ResponseEntity<PostResponseDTO> getPost(@PathVariable long postId){
+    public ResponseEntity<Post> getPost(@PathVariable long postId){
 
         // 게시글 조회
         Optional<Post> postOptional = postRepository.findById(postId);
@@ -96,17 +96,7 @@ public class PostController {
             Post post = postOptional.get();
             System.out.println(post);
 
-            PostResponseDTO responseDTO = new PostResponseDTO(
-                    post.getPostId(),
-                    post.getTitle(),
-                    post.getContent(),
-                    post.getCode(),
-                    post.getLikes(),
-                    post.getReply(),
-                    post.getTags()
-            );
-
-            return ResponseEntity.ok(responseDTO);
+            return ResponseEntity.ok(post);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // HTTP 404 Not Found 응답
         }
