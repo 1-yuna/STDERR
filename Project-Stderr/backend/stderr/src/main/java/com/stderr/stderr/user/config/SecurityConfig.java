@@ -13,6 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.ExceptionTranslationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -23,8 +24,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable());      // 1. csrf 보안기능 끄기
+
+        http.addFilterBefore(new JwtFilter(), ExceptionTranslationFilter.class);
         http.authorizeHttpRequests((authorize) ->
-                authorize.requestMatchers("/api/**").permitAll()    // 2. 모든 url 로그인 검사기능 끄기
+                authorize.requestMatchers("/api/login", "/api/join").permitAll()    // 2. 모든 url 로그인 검사기능 끄기
+                        .anyRequest().authenticated()
         );
 
         http.sessionManagement((session) -> session

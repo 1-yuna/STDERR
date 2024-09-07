@@ -39,7 +39,7 @@ public class JwtUtil {
                 .claim("username", user.getUsername())   //입장권에 집어넣을 정보 넣기  +누구나 볼 수 있기 때문에 비밀번호는 적지 마셈
                 .claim("authorities", authorities)
                 .issuedAt(new Date(System.currentTimeMillis()))  // 언제 발행
-                .expiration(new Date(System.currentTimeMillis() + 10000)) //유효기간 (10초)
+                .expiration(new Date(System.currentTimeMillis() + 3600000)) //유효기간 (10초)
                 .signWith(key)  // 해싱할 때 넣는 비번
                 .compact();
         return jwt;
