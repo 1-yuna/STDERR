@@ -24,6 +24,7 @@ public class CategoryConfig {
         addCategory("HTML/CSS");
         addCategory("React/Vue");
         addCategory("etc.");
+        addCategory("Forum");
     }
 
     private void addCategory(String name) {
