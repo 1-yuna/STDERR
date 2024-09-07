@@ -1,11 +1,10 @@
-package com.stderr.stderr.DTO;
+package com.stderr.stderr.post.dto;
 
-import com.stderr.stderr.Entity.Tag;
+import com.stderr.stderr.tag.entity.Tag;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 

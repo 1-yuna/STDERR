@@ -1,7 +1,7 @@
-package com.stderr.stderr.Config;
+package com.stderr.stderr.category.config;
 
-import com.stderr.stderr.Entity.Category;
-import com.stderr.stderr.Repository.CategoryRepository;
+import com.stderr.stderr.category.entity.Category;
+import com.stderr.stderr.category.repository.CategoryRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

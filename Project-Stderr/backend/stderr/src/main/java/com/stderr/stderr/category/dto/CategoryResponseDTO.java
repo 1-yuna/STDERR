@@ -1,5 +1,6 @@
-package com.stderr.stderr.DTO;
+package com.stderr.stderr.category.dto;
 
+import com.stderr.stderr.post.dto.PostResponseDTO;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

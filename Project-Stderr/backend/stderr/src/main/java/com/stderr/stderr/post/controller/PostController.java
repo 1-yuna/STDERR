@@ -1,13 +1,13 @@
-package com.stderr.stderr.Controller;
+package com.stderr.stderr.post.controller;
 
-import com.stderr.stderr.DTO.PostRequestDTO;
-import com.stderr.stderr.DTO.PostResponseDTO;
-import com.stderr.stderr.Entity.Post;
-import com.stderr.stderr.Repository.PostRepository;
-import com.stderr.stderr.Entity.Category;
-import com.stderr.stderr.Repository.CategoryRepository;
-import com.stderr.stderr.Entity.Tag;
-import com.stderr.stderr.Repository.TagRepository;
+import com.stderr.stderr.post.dto.PostRequestDTO;
+import com.stderr.stderr.post.dto.PostResponseDTO;
+import com.stderr.stderr.post.entity.Post;
+import com.stderr.stderr.post.repository.PostRepository;
+import com.stderr.stderr.category.entity.Category;
+import com.stderr.stderr.category.repository.CategoryRepository;
+import com.stderr.stderr.tag.entity.Tag;
+import com.stderr.stderr.tag.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

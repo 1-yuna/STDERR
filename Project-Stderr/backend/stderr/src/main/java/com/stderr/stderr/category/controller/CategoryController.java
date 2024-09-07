@@ -1,11 +1,11 @@
-package com.stderr.stderr.Controller;
+package com.stderr.stderr.category.controller;
 
-import com.stderr.stderr.DTO.CategoryResponseDTO;
-import com.stderr.stderr.Entity.Category;
-import com.stderr.stderr.Repository.CategoryRepository;
-import com.stderr.stderr.Entity.Post;
-import com.stderr.stderr.DTO.PostResponseDTO;
-import com.stderr.stderr.Repository.PostRepository;
+import com.stderr.stderr.category.dto.CategoryResponseDTO;
+import com.stderr.stderr.category.entity.Category;
+import com.stderr.stderr.category.repository.CategoryRepository;
+import com.stderr.stderr.post.entity.Post;
+import com.stderr.stderr.post.dto.PostResponseDTO;
+import com.stderr.stderr.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

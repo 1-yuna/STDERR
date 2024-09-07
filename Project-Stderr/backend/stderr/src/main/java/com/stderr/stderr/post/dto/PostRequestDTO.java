@@ -1,4 +1,4 @@
-package com.stderr.stderr.DTO;
+package com.stderr.stderr.post.dto;
 
 import lombok.Getter;
 import lombok.Setter;

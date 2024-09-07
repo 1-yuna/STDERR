@@ -1,9 +1,8 @@
-package com.stderr.stderr.Controller;
+package com.stderr.stderr.user.controller;
 
-import com.stderr.stderr.DTO.JoinRequestDTO;
-import com.stderr.stderr.DTO.PostResponseDTO;
-import com.stderr.stderr.Entity.User;
-import com.stderr.stderr.Repository.UserRepository;
+import com.stderr.stderr.user.dto.JoinRequestDTO;
+import com.stderr.stderr.user.entity.User;
+import com.stderr.stderr.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,7 +1,7 @@
-package com.stderr.stderr.Controller;
+package com.stderr.stderr.like.controller;
 
-import com.stderr.stderr.Entity.Post;
-import com.stderr.stderr.Repository.PostRepository;
+import com.stderr.stderr.post.entity.Post;
+import com.stderr.stderr.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.stderr.stderr.Entity;
+package com.stderr.stderr.tag.entity;
 
 
 import jakarta.persistence.*;

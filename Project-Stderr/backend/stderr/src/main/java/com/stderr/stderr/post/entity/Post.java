@@ -1,7 +1,7 @@
-package com.stderr.stderr.Entity;
+package com.stderr.stderr.post.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.stderr.stderr.tag.entity.Tag;
+import com.stderr.stderr.category.entity.Category;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

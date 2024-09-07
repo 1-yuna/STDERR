@@ -1,4 +1,4 @@
-package com.stderr.stderr.Config;
+package com.stderr.stderr.user.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
-package com.stderr.stderr.Repository;
+package com.stderr.stderr.tag.repository;
 
 
-import com.stderr.stderr.Entity.Tag;
+import com.stderr.stderr.tag.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
-package com.stderr.stderr.Repository;
+package com.stderr.stderr.category.repository;
 
-import com.stderr.stderr.Entity.Category;
+import com.stderr.stderr.category.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
