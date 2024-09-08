@@ -12,22 +12,23 @@ import lombok.ToString;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
 
     @Column(unique = true)
     private String username;
     private String email;
     private String password;
     private String name;
-    private String profile_image;
+    private String profileImage;
     private String description;
-    private Integer like_total_count;
-    private Integer reply_total_count;
-    private Integer visiter_total_count;
+    private Integer likeTotalCount;
+    private Integer postTotalCount;
+    private Integer replyTotalCount;
+    private Integer visiterTotalCount;
     private Integer grade;
-    private String git_address;
-    private String tistory_address;
-    private String user_web_address;
+    private String gitAddress;
+    private String tistoryAddress;
+    private String userWebAddress;
 
 
 }
