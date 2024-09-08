@@ -8,6 +8,8 @@ import com.stderr.stderr.category.entity.Category;
 import com.stderr.stderr.category.repository.CategoryRepository;
 import com.stderr.stderr.tag.entity.Tag;
 import com.stderr.stderr.tag.repository.TagRepository;
+import com.stderr.stderr.user.entity.User;
+import com.stderr.stderr.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ public class PostController {
     private final TagRepository tagRepository;
     private final PostRepository postRepository;
     private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
 
     //게시물 post
     @PostMapping("/api/post")
@@ -31,11 +34,19 @@ public class PostController {
         // 카테고리 조회
         Optional<Category> categoryOptional = categoryRepository.findById(postRequestDTO.getCategoryId());
 
+        // user 임의로 줌 (수정 필요)
+        Optional<User> userOptional = userRepository.findById(1L);
+
         // 카운트 업데이트
         if (categoryOptional.isPresent()) {
             Category category = categoryOptional.get();
             updatePostCountForCategory(category, 1);
         }
+
+        if (userOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        User user = userOptional.get();
 
         // 태그 처리
         Set<Tag> tags = new HashSet<>();
@@ -66,9 +77,14 @@ public class PostController {
         post.setContent(postRequestDTO.getContent());
         post.setCode(postRequestDTO.getCode());
         post.setCategory(categoryOptional.get());
+        post.setUser(user);
         post.setCreatedAt(LocalDateTime.now());
         post.setTags(tags);
         postRepository.save(post);
+
+        // User의 post_total_count 업데이트
+        user.setPostTotalCount(user.getPostTotalCount() + 1);
+        userRepository.save(user);
 
         //response 응답
         PostResponseDTO responseDTO = new PostResponseDTO (
@@ -106,6 +122,8 @@ public class PostController {
     @PutMapping("api/post/{postId}")
     public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody PostRequestDTO postRequestDTO){
 
+
+
         // 게시물 조회
         Optional<Post> postOptional = postRepository.findById(postId);
         if(postOptional.isEmpty()) {
@@ -118,6 +136,7 @@ public class PostController {
         if (post.getCategory() != null) {
             updatePostCountForCategory(post.getCategory(), -1);
         }
+
 
         // 새 카테고리에서 게시물 수 증가
         Optional<Category> categoryOptional = categoryRepository.findById(postRequestDTO.getCategoryId());
@@ -182,6 +201,12 @@ public class PostController {
             }
             // 게시물 삭제
             postRepository.deleteById(postId);
+
+            // User의 post_total_count 감소
+            User user = post.getUser();
+            user.setPostTotalCount(user.getPostTotalCount() - 1);
+            userRepository.save(user);
+            
             return ResponseEntity.ok("successfully");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

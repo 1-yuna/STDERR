@@ -1,9 +1,14 @@
 package com.stderr.stderr.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.stderr.stderr.post.entity.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Setter
@@ -12,6 +17,7 @@ import lombok.ToString;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="user_id")
     private Long userId;
 
     @Column(unique = true)
@@ -21,14 +27,19 @@ public class User {
     private String name;
     private String profileImage;
     private String description;
-    private Integer likeTotalCount;
-    private Integer postTotalCount;
-    private Integer replyTotalCount;
-    private Integer visiterTotalCount;
+    private Integer likeTotalCount = 0;
+    private Integer postTotalCount = 0;
+    private Integer replyTotalCount = 0;
+    private Integer visiterTotalCount = 0;
     private Integer grade;
     private String gitAddress;
     private String tistoryAddress;
     private String userWebAddress;
+
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts = new ArrayList<>();
 
 
 }

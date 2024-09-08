@@ -2,6 +2,7 @@ package com.stderr.stderr.post.entity;
 
 import com.stderr.stderr.tag.entity.Tag;
 import com.stderr.stderr.category.entity.Category;
+import com.stderr.stderr.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,6 +37,10 @@ public class Post {
     @ManyToOne
     @JoinColumn(name="category_id", foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name="user_id", foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+    private User user;
 
     @ManyToMany
     @JoinTable(name = "post_tag", joinColumns = @JoinColumn(name = "post_id"),
