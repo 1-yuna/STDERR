@@ -3,6 +3,7 @@ package com.stderr.stderr.user.controller;
 import com.stderr.stderr.category.entity.Category;
 import com.stderr.stderr.post.dto.PostResponseDTO;
 import com.stderr.stderr.user.dto.JoinRequestDTO;
+import com.stderr.stderr.user.dto.UserRequestDTO;
 import com.stderr.stderr.user.dto.UserResponseDTO;
 import com.stderr.stderr.user.entity.User;
 import com.stderr.stderr.user.repository.UserRepository;
@@ -66,8 +67,31 @@ public class UserController {
 
         }
 
-
     }
 
+
+    @PatchMapping("/api/user/myPage/{userId}")
+    public ResponseEntity<String> myPagePatch(@PathVariable long userId, @RequestBody UserRequestDTO userReqestDTO) {
+
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            user.setName(userReqestDTO.getName());
+            user.setProfileImage(userReqestDTO.getProfileImage());
+            user.setDescription(userReqestDTO.getDescription());
+            user.setGitAddress(userReqestDTO.getGitAddress());
+            user.setTistoryAddress(userReqestDTO.getTistoryAddress());
+            user.setUserWebAddress(userReqestDTO.getUserWebAddress());
+
+            userRepository.save(user);
+
+            return ResponseEntity.ok("Successfully");
+        } else {
+            return ResponseEntity.notFound().build();
+
+        }
+
+    }
 
 }
