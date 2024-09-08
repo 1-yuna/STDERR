@@ -26,22 +26,13 @@ public class LikeController {
 
         if (postOptional.isPresent()) {
             Post post = postOptional.get();
-            if (post.getLikes() == null) {
-                post.setLikes(0);
-            }
-            System.out.println(post.getLikes());
             post.setLikes(post.getLikes() + 1);
             postRepository.save(post);
 
             // 작성자의 likeTotalCount 증가
             User user = post.getUser();
-            if (user != null) {
-                if (user.getLikeTotalCount() == null) {
-                    user.setLikeTotalCount(0);
-                }
-                user.setLikeTotalCount(user.getLikeTotalCount() + 1);
-                userRepository.save(user);
-            }
+            user.setLikeTotalCount(user.getLikeTotalCount() + 1);
+            userRepository.save(user);
 
             return ResponseEntity.ok(true);
         } else {

@@ -31,22 +31,23 @@ public class PostController {
     @PostMapping("/api/post")
     public ResponseEntity<PostResponseDTO> creatPost(@RequestBody PostRequestDTO postRequestDTO){
 
-        // 카테고리 조회
         Optional<Category> categoryOptional = categoryRepository.findById(postRequestDTO.getCategoryId());
-
-        // user 임의로 줌 (수정 필요)
-        Optional<User> userOptional = userRepository.findById(1L);
+        Optional<User> userOptional = userRepository.findById(1L);  // 수정필요
 
         // 카운트 업데이트
         if (categoryOptional.isPresent()) {
             Category category = categoryOptional.get();
-            updatePostCountForCategory(category, 1);
+            category.setPostCount(category.getPostCount() + 1);
+            categoryRepository.save(category);
         }
 
         if (userOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         User user = userOptional.get();
+        user.setPostTotalCount(user.getPostTotalCount() + 1);
+        userRepository.save(user);
+
 
         // 태그 처리
         Set<Tag> tags = new HashSet<>();
@@ -82,9 +83,6 @@ public class PostController {
         post.setTags(tags);
         postRepository.save(post);
 
-        // User의 post_total_count 업데이트
-        user.setPostTotalCount(user.getPostTotalCount() + 1);
-        userRepository.save(user);
 
         //response 응답
         PostResponseDTO responseDTO = new PostResponseDTO (
@@ -105,14 +103,12 @@ public class PostController {
     @GetMapping("api/post/{postId}")
     public ResponseEntity<Post> getPost(@PathVariable long postId){
 
-        // 게시글 조회
         Optional<Post> postOptional = postRepository.findById(postId);
 
         if (postOptional.isPresent()) {
             Post post = postOptional.get();
-            System.out.println(post);
-
             return ResponseEntity.ok(post);
+
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // HTTP 404 Not Found 응답
         }
@@ -122,32 +118,26 @@ public class PostController {
     @PutMapping("api/post/{postId}")
     public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody PostRequestDTO postRequestDTO){
 
-
-
-        // 게시물 조회
         Optional<Post> postOptional = postRepository.findById(postId);
+        Optional<Category> categoryOptional = categoryRepository.findById(postRequestDTO.getCategoryId());
+
+
         if(postOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
         Post post = postOptional.get();
 
         // 이전 카테고리 게시물 수 감소
         if (post.getCategory() != null) {
-            updatePostCountForCategory(post.getCategory(), -1);
+            Category category = post.getCategory();
+            category.setPostCount(category.getPostCount() - 1); // 게시물 수 감소
+            categoryRepository.save(category);
         }
 
-
-        // 새 카테고리에서 게시물 수 증가
-        Optional<Category> categoryOptional = categoryRepository.findById(postRequestDTO.getCategoryId());
-
-
-        // 카테고리 업데이트
+        //카운트 증가
         if (categoryOptional.isPresent()) {
-            // 게시물 수 계산 $$ 업데이트
             Category category = categoryOptional.get();
-            updatePostCountForCategory(category, 1);
-
+            category.setPostCount(category.getPostCount() + 1);
             post.setCategory(category);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();// 카테고리 ID가 유효하지 않으면 400 오류 반환
@@ -177,7 +167,7 @@ public class PostController {
         post.setTitle(postRequestDTO.getTitle());
         post.setContent(postRequestDTO.getContent());
         post.setCode(postRequestDTO.getCode());
-        post.setUpdatedAt(LocalDateTime.now()); // 수정 시각 업데이트
+        post.setUpdatedAt(LocalDateTime.now());
         postRepository.save(post);
 
         return ResponseEntity.ok(post);
@@ -187,26 +177,27 @@ public class PostController {
     @DeleteMapping("api/post/{postId}")
     public ResponseEntity<String> deletePost(@PathVariable long postId){
 
-        // 게시불 불러오기
         Optional<Post> postOptional = postRepository.findById(postId);
+
         if(postOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+
         Post post = postOptional.get();
 
         if(postRepository.existsById(postId)){
             // 게시물 수 감소
             if (post.getCategory() != null) {
-                updatePostCountForCategory(post.getCategory(), -1);
+                post.getCategory().setPostCount(post.getCategory().getPostCount() - 1);
             }
             // 게시물 삭제
             postRepository.deleteById(postId);
 
-            // User의 post_total_count 감소
+            // post_total_count 감소
             User user = post.getUser();
             user.setPostTotalCount(user.getPostTotalCount() - 1);
             userRepository.save(user);
-            
+
             return ResponseEntity.ok("successfully");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -214,12 +205,6 @@ public class PostController {
         }
     }
 
-    // 카테고리 게시물 수 업데이트
-    private void updatePostCountForCategory(Category category, int increment) {
-        Integer postCount = postRepository.countByCategory_CategoryId(category.getCategoryId());
-        category.setPostCount(postCount + increment);
-        categoryRepository.save(category);
-    }
 }
 
 
