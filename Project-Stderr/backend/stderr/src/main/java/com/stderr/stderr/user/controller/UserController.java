@@ -45,6 +45,9 @@ public class UserController {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
+            // 등급 계산
+            user.setGrade(user.getLikeTotalCount() + user.getReplyTotalCount());
+
             UserResponseDTO responseDTO = new UserResponseDTO (
                     user.getUserId(),
                     user.getName(),
