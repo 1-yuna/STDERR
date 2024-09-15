@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const ViewTitleBody = styled.div`
   display: flex;
@@ -43,12 +44,37 @@ const RemoveButton = styled.button`
 `;
 
 // eslint-disable-next-line react/prop-types
-function ViewTitle({ title }) {
+function ViewTitle({ title, postId }) {
+  const navigate = useNavigate();
+
+  const handleRemove = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/post/${postId}`, // 삭제할 포스트의 URL
+        {
+          method: "DELETE",
+        },
+      );
+
+      if (response.ok) {
+        alert("삭제되었습니다!");
+        navigate(-1);
+      } else {
+        console.error("Server responded with status:", response.status);
+        alert("Failed to delete post");
+      }
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      alert("Error deleting post");
+    }
+  };
+
   return (
     <ViewTitleBody>
       {title}
       <DivBox>
-        <EditButton>Edit</EditButton>/<RemoveButton> Remove</RemoveButton>
+        <EditButton>Edit</EditButton>/
+        <RemoveButton onClick={handleRemove}> Remove</RemoveButton>
       </DivBox>
     </ViewTitleBody>
   );

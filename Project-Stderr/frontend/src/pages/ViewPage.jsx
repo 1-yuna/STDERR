@@ -13,8 +13,6 @@ function ViewPage() {
   const { postId } = useParams();
   const [postData, setPostData] = useState(null);
 
-  console.log(postId);
-
   useEffect(() => {
     const fetchPostData = async () => {
       try {
@@ -45,7 +43,7 @@ function ViewPage() {
   return (
     <Background>
       <TopBar isBackBtn={true} />
-      <ViewTitle title={postData.title} />
+      <ViewTitle title={postData.title} postId={postId} />
       <Question
         content={postData.content}
         heart={true}
