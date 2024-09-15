@@ -67,10 +67,11 @@ const TagContainer = styled.div`
 `;
 
 const TagBox = styled.div`
-  display: flex;
+  display: inline-flex;
   justify-content: center;
+  margin-right: 5px;
+  padding: 0 5px;
   align-items: center;
-  width: 50px;
   height: 100%;
   background-color: #f3ecff;
   color: #8145cd;
@@ -129,51 +130,33 @@ const ReplyCount = styled.div`
 `;
 
 // eslint-disable-next-line react/prop-types
-function Post({ first }) {
+function Post({ post }) {
   const navigate = useNavigate();
-  const count = 2;
-
-  const text =
-    " '뭐해?'라는 두 글자에 '네가 보고 싶어' 나의 속마음을 담아 우 이모티콘\n" +
-    "          하나하나 속에 달라지는 내 미묘한 심리를 알까 우 아니 바쁘지 않아\n" +
-    "          nothing no no 잠들어 있지 않아 insomnia-nia-nia 지금 다른 사람과 함\n" +
-    "          께이지 않아 응, 나도 너를 생각 중 우리의 네모 칸은 bloom\n" +
-    "          엄지손가락으로 장미꽃을 피워 향기에 취할 것 같아 우 오직 둘만의 비밀의\n" +
-    "          정원 I feel bloom, I feel bloom, I feel bloom 너에게 한 송이를 더 보내\n" +
-    "          밤샘 작업으로 업데이트 흥미로운이 작품의 지은이 that's me 우 어쩜 이\n" +
-    "          관계의 클라이맥스 '뭐해?'라는 두 글자에 '네가 보고 싶어' 나의 속마음을\n" +
-    "          담아 우 이모티콘 하나하나 속에 달라지는 내 미묘한 심리를 알까 우 아니\n" +
-    "          바쁘지 않아 nothing no no 잠들어 있지 않아 insomnia-nia-nia 지금 다른\n" +
-    "          사람과 함께이지 않아 응, 나도 너를 생각 중 우리의 네모 칸은 bloom\n" +
-    "          엄지손가락으로 장미꽃을 피워 향기에밤샘 작업으로 업데이트 흥미로운 이\n" +
-    "          작품의 지은이 that's me 우 어쩜 이 관계의 클라이맥스 '뭐해?'라는 두\n" +
-    "          글자에 '네가 보고 싶어' 나의 속마음을 담아 우 이모티콘 하나하나 속에\n" +
-    "          달라지는 내 미묘한 심리를 알까 우 아니 바쁘지 않아 nothing no no\n" +
-    "          잠들어 있지 않아 insomnia-nia-nia 지금 다른 사람과 함께이지 않아 응,\n" +
-    "          나도 너를 생각 중 우리의 네모 칸은 bloom 엄지손가락으로 장미꽃을 피워\n" +
-    "          향기에";
   const handleClick = () => {
     navigate("/view"); // 클릭 시 "/newpage"로 이동
   };
 
   return (
-    <PostBox first={first}>
+    <PostBox>
       <TitleCommentBox onClick={handleClick}>
-        <Title>Kotlin 회원가입 기능</Title>
-        <CommentBox>{text}</CommentBox>
+        <Title>{post.title}</Title>
+        <CommentBox>{post.content}</CommentBox>
       </TitleCommentBox>
       <Tagline>
         <TagContainer>
-          <TagBox>#kotlin</TagBox>
+          {post.tags &&
+            post.tags.map((tag) => (
+              <TagBox key={tag.tagId}>#{tag.tagName}</TagBox>
+            ))}
         </TagContainer>
         <IconContainer>
           <HeartBox>
             <HeartIcon size={20} />
-            <HeartCount>2</HeartCount>
+            <HeartCount>{post.likes}</HeartCount>
           </HeartBox>
           <ReplyBox>
             <ReplyIcon />
-            <ReplyCount>{count}</ReplyCount>
+            <ReplyCount>{post.reply}</ReplyCount>
           </ReplyBox>
         </IconContainer>
       </Tagline>

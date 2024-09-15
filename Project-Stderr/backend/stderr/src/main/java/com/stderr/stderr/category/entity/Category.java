@@ -23,7 +23,7 @@ public class Category {
     private Long categoryId;
 
     private String categoryName;
-    private Integer postCount;
+    private Integer postCount =0;
 
     @ToString.Exclude
     @JsonIgnore

@@ -1,15 +1,17 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Background from "../components/common/Background";
 import TopBar from "../components/common/Bar/TopBar.jsx";
 import Post from "../components/common/View/Post.jsx";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 const CategoryBox = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding-bottom: 5px;
+  border-bottom: 1px solid #d9d9d9;
 `;
 const Questions = styled.div`
   display: flex;
@@ -22,16 +24,50 @@ const Category = styled.div`
 `;
 
 function BoardPage() {
-  const count = 2;
+  const { categoryId } = useParams();
+  // const categoryIdNumber = Number(categoryId);
+  const [categoryData, setCategoryData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/category/${categoryId}`,
+          {
+            method: "GET",
+          },
+        );
+
+        if (response.ok) {
+          const data = await response.json(); // 응답을 JSON으로 파싱
+          setCategoryData(data);
+        } else {
+          console.error("Server responded with status:", response.status);
+        }
+      } catch (error) {
+        console.error("Error fetching category data:", error);
+      }
+    };
+
+    fetchData(); // 데이터 가져오기
+  }, [categoryId]);
+
   return (
     <Background>
-      <CategoryBox>
-        <Questions>{count} questions</Questions>
-        <Category> Java / Kotlin </Category>
-      </CategoryBox>
       <TopBar></TopBar>
-      <Post first={true}></Post>
-      <Post></Post>
+      {categoryData ? (
+        <>
+          <CategoryBox>
+            <Questions>{categoryData.postCount} questions</Questions>
+            <Category> {categoryData.categoryName} </Category>
+          </CategoryBox>
+          {categoryData.posts.map((post) => (
+            <Post key={post.postId} post={post} />
+          ))}
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </Background>
   );
 }
