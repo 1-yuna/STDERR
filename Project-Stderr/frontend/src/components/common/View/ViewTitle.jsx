@@ -69,11 +69,15 @@ function ViewTitle({ title, postId }) {
     }
   };
 
+  const handleClick = () => {
+    navigate(`/editQuestion/${postId}`);
+  };
+
   return (
     <ViewTitleBody>
       {title}
       <DivBox>
-        <EditButton>Edit</EditButton>/
+        <EditButton onClick={handleClick}>Edit</EditButton>/
         <RemoveButton onClick={handleRemove}> Remove</RemoveButton>
       </DivBox>
     </ViewTitleBody>

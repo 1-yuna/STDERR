@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Background from "../components/common/Background";
 import TopBar from "../components/common/Bar/TopBar.jsx";
 import Dropdown from "../components/common/Dropdown/index.jsx";
@@ -10,6 +10,7 @@ import TitleTag from "../components/common/Write/TitleTag.jsx";
 import WriteComment from "../components/common/Write/WriteComment.jsx";
 import WriteCode from "../components/common/Write/WriteCode.jsx";
 import PostBtn from "../components/common/Write/PostBtn.jsx";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const TopBox = styled.div`
@@ -73,15 +74,18 @@ const RuleText = styled.div`
 `;
 
 function QuestionPage() {
-  //드롭다운
-  const [view, setView] = useState(false);
+  // 드롭다운
+  const [view, setView] = useState(false); //드롭다운
   const [selectedOption, setSelectedOption] = useState("C / C++ / C#");
+  // 데이터 불러오기
+  const { postId } = useParams();
 
-  //데이터 저장
+  // 데이터 저장
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [code, setCode] = useState("");
   const [tags, setTags] = useState([]);
+
   const navigate = useNavigate();
 
   const str =
@@ -91,7 +95,38 @@ function QuestionPage() {
     setView(false); //드롭다운 닫기
   };
 
-  const handleSubmit = async () => {
+  // 데이터 불러오기
+  useEffect(() => {
+    const fetchPostData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/api/post/${postId}`,
+          {
+            method: "GET",
+          },
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setTitle(data.title);
+          setContent(data.content);
+          setCode(data.code);
+          // 태그를 띄어쓰기로 구분된 문자열로 변환
+          setTags(
+            data.tags ? data.tags.map((tag) => tag.tagName).join(" ") : [],
+          );
+          console.log(data);
+        } else {
+          console.error("Server responded with status:", response.status);
+        }
+      } catch (error) {
+        console.error("Error fetching post data:", error);
+      }
+    };
+    fetchPostData();
+  }, [postId]);
+
+  const handleEdit = async () => {
     // 입력 검증
     if (!title || !content || !code) {
       alert("제목, 내용, 코드 모두 입력해야 합니다.");
@@ -141,9 +176,11 @@ function QuestionPage() {
       ...(tagArray.length > 0 && { tags: tagArray }), // tagArray가 비어있지 않으면 tags 필드를 추가
     };
 
+    console.log("??", postData);
+
     try {
-      const response = await fetch("http://localhost:8080/api/post", {
-        method: "POST",
+      const response = await fetch(`http://localhost:8080/api/post/${postId}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -184,7 +221,7 @@ function QuestionPage() {
         </DropDownBox>
       </TopBox>
       <RuleBox>
-        <RuleTitle>Step</RuleTitle>
+        a<RuleTitle>Step</RuleTitle>
         <RuleText>{str}</RuleText>
       </RuleBox>
       <TitleTag
@@ -203,7 +240,7 @@ function QuestionPage() {
         value={tags}
         onChange={(e) => setTags(e.target.value)}
       />
-      <PostBtn name="Post" onClick={handleSubmit} />
+      <PostBtn name="Post" onClick={handleEdit} />
     </Background>
   );
 }

@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import { FaRegHeart } from "react-icons/fa";
@@ -140,7 +140,7 @@ function Post({ post, categoryId }) {
         <TagContainer>
           {post.tags &&
             post.tags.map((tag) => (
-              <TagBox key={tag.tagId}>#{tag.tagName}</TagBox>
+              <TagBox key={tag.tagId}>{tag.tagName}</TagBox>
             ))}
         </TagContainer>
         <IconContainer>
