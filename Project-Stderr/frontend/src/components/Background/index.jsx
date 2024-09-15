@@ -4,8 +4,7 @@ import styled from "styled-components";
 
 const BackgroundPadding = styled.div`
   width: 100%;
-  height: 100vh;
-  padding: 80px 300px 0px 300px;
+  padding: 150px 20% 100px 20%;
 `;
 
 // eslint-disable-next-line react/prop-types

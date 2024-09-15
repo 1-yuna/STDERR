@@ -2,17 +2,15 @@
 import React from "react";
 import styled from "styled-components";
 
-// <TitleTag name="Title" />
-// <TitleTag name="Tags" />
-
-const TitleTagBody = styled.div`
+const CommentBody = styled.div`
   width: 100%;
+  padding: 30px 0;
 `;
 
 const Title = styled.div`
   width: 100%;
-  padding: 10px 30px;
-  font-size: 25px;
+  padding: 10px 10px;
+  font-size: 20px;
   color: #797979;
 `;
 
@@ -21,15 +19,15 @@ const TextBox = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 50px;
+  height: 300px;
   background-color: white;
-  border-radius: 30px;
+  border-radius: 20px;
   border: 2px solid #d9d9d9;
 `;
 
 const Text = styled.textarea`
   width: calc(100% - 60px);
-  height: calc(100% - 25px);
+  height: calc(100% - 60px);
   background-color: white;
   border: none;
   outline: none;
@@ -41,18 +39,15 @@ const Text = styled.textarea`
 `;
 
 // eslint-disable-next-line react/prop-types
-function TitleTag({ name }) {
+function WriteComment({ name }) {
   return (
-    <TitleTagBody>
+    <CommentBody>
       <Title>{name}</Title>
       <TextBox>
-        <Text
-          type="text"
-          placeholder={name === "Title" ? " " : "#kotlin #회원가입"}
-        />
+        <Text type="text" placeholder="Comments.." />
       </TextBox>
-    </TitleTagBody>
+    </CommentBody>
   );
 }
 
-export default TitleTag;
+export default WriteComment;
