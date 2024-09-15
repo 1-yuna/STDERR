@@ -36,19 +36,12 @@ function Dropdown({ onSelect }) {
         Java / Kotlin
       </DropdownText>
       <DropdownText onClick={() => onSelect("Python")}>Python</DropdownText>
-      <DropdownText onClick={() => onSelect("JavaScript")}>
-        JavaScript
+      <DropdownText onClick={() => onSelect("Go/Rust/Zig")}>
+        Go/Rust/Zig
       </DropdownText>
-      <DropdownText onClick={() => onSelect("HTML / CSS")}>
-        HTML / CSS
-      </DropdownText>
-      <DropdownText onClick={() => onSelect("React / Vue")}>
-        React / Vue
-      </DropdownText>
-      <DropdownText onClick={() => onSelect("etc")}>etc</DropdownText>
-      <DropdownText onClick={() => onSelect("Communicate")}>
-        Communicate
-      </DropdownText>
+      <DropdownText onClick={() => onSelect("Swift")}>Swift</DropdownText>
+      <DropdownText onClick={() => onSelect("etc.")}>etc.</DropdownText>
+      <DropdownText onClick={() => onSelect("Forum")}>Forum</DropdownText>
     </DropdownBox>
   );
 }

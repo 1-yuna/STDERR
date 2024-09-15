@@ -31,7 +31,7 @@ const Text = styled.textarea`
   background-color: #f7f7f7;
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 12px;
   resize: none;
   &::placeholder {
     color: #bebebe;
@@ -58,12 +58,17 @@ const CodeButton = styled.button`
 `;
 
 // eslint-disable-next-line react/prop-types
-function WriteCode() {
+function WriteCode({ value, onChange }) {
   return (
     <CodeBody>
       <Title>Code</Title>
       <TextBox>
-        <Text type="text" placeholder="Comments.." />
+        <Text
+          type="text"
+          placeholder="Comments.."
+          value={value}
+          onChange={onChange}
+        />
       </TextBox>
     </CodeBody>
   );

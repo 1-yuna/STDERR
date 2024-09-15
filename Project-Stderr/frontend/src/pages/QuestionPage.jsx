@@ -10,6 +10,7 @@ import TitleTag from "../components/common/Write/TitleTag.jsx";
 import WriteComment from "../components/common/Write/WriteComment.jsx";
 import WriteCode from "../components/common/Write/WriteCode.jsx";
 import PostBtn from "../components/common/Write/PostBtn.jsx";
+import { useNavigate } from "react-router-dom";
 
 const TopBox = styled.div`
   display: flex;
@@ -33,11 +34,6 @@ const DropDownBox = styled.div`
   align-items: center;
   position: relative;
   width: 150px;
-  //width: 150px;
-  //background-color: #e7e7e7;
-  //border-radius: 10px;
-  //height: 35px;
-  //font-weight: bold;
 `;
 
 const DropDownBtn = styled.div`
@@ -78,7 +74,12 @@ const RuleText = styled.div`
 
 function QuestionPage() {
   const [view, setView] = useState(false); //드롭다운
-  const [selectedOption, setSelectedOption] = useState(""); // 선택된 option
+  const [selectedOption, setSelectedOption] = useState("C / C++ / C#"); // 선택된 option
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [code, setCode] = useState("");
+  const [tags, setTags] = useState([]);
+  const navigate = useNavigate();
 
   const str =
     " 1. 문제 상황(제목)을 한 줄로 요약하기! \n 2. 문제에 대해 자세히 서술해주세요!\n 3. 본인이 하고자하는 바가 무엇인지도 서술해주세요! \n 4. 문제 상황과 관련있는 태그를 추가해주세요! \n 5. 글 올리기! \n";
@@ -86,6 +87,81 @@ function QuestionPage() {
     setSelectedOption(option);
     setView(false); //드롭다운 닫기
   };
+
+  const handleSubmit = async () => {
+    // 입력 검증
+    if (!title || !content || !code) {
+      alert("제목, 내용, 코드 모두 입력해야 합니다.");
+      return;
+    }
+
+    // 카테고리 아이디
+    const categoryId = (() => {
+      switch (selectedOption) {
+        case "C / C++ / C#":
+          return 1;
+        case "Java / Kotlin":
+          return 2;
+        case "Python":
+          return 3;
+        case "Go/Rust/Zig":
+          return 4;
+        case "Swift":
+          return 5;
+        case "etc.":
+          return 6;
+        case "Forum":
+          return 7;
+        default:
+          return 1;
+      }
+    })();
+
+    // 태그 검사
+    const tagArray = tags
+      .trim()
+      .split(" ")
+      .filter((tag) => tag.startsWith("#"))
+      .map((tag) => tag.slice(1)); // # 제거
+    if (
+      tags.trim() !== "" &&
+      tagArray.length !== tags.trim().split(" ").length
+    ) {
+      alert("#로 시작하지 않는 태그가 있습니다.");
+      return;
+    }
+
+    const postData = {
+      title,
+      content,
+      code,
+      categoryId,
+      ...(tagArray.length > 0 && { tags: tagArray }), // tagArray가 비어있지 않으면 tags 필드를 추가
+    };
+
+    console.log("??", postData);
+
+    try {
+      const response = await fetch("http://localhost:8080/api/post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
+
+      if (response.ok) {
+        console.log("200");
+        alert("작성이 완료되었습니다!");
+        navigate(-1);
+      } else {
+        console.error("Failed to submit post:", response.status);
+      }
+    } catch (error) {
+      console.error("Error submitting post:", error);
+    }
+  };
+
   return (
     <Background>
       <TopBar isBackBtn={true} />
@@ -97,7 +173,7 @@ function QuestionPage() {
           }}
         >
           <DropDownBtn>
-            {selectedOption || "Java / Kotlin"}
+            {selectedOption || "C / C++ / C#"}
             {view ? (
               <MdOutlineArrowDropUp size={30} />
             ) : (
@@ -111,11 +187,23 @@ function QuestionPage() {
         <RuleTitle>Step</RuleTitle>
         <RuleText>{str}</RuleText>
       </RuleBox>
-      <TitleTag name="Title" />
-      <WriteComment name="Comment" />
-      <WriteCode />
-      <TitleTag name="Tag" />
-      <PostBtn name="Post" route="home" />
+      <TitleTag
+        name="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <WriteComment
+        name="Comment"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
+      <WriteCode value={code} onChange={(e) => setCode(e.target.value)} />
+      <TitleTag
+        name="Tag"
+        value={tags}
+        onChange={(e) => setTags(e.target.value)}
+      />
+      <PostBtn name="Post" onClick={handleSubmit} />
     </Background>
   );
 }

@@ -39,7 +39,7 @@ const Text = styled.textarea`
 `;
 
 // eslint-disable-next-line react/prop-types
-function TitleTag({ name }) {
+function TitleTag({ name, value, onChange }) {
   return (
     <TitleTagBody>
       <Title>{name}</Title>
@@ -47,6 +47,8 @@ function TitleTag({ name }) {
         <Text
           type="text"
           placeholder={name === "Title" ? " " : "#kotlin #회원가입"}
+          value={value}
+          onChange={onChange}
         />
       </TextBox>
     </TitleTagBody>
