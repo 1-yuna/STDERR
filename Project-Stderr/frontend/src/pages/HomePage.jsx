@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
-import HamburgerBar from "../components/Bar/HamburgerBar.jsx";
-import Background from "../components/Background/index.jsx";
+import HamburgerBar from "../components/common/Bar/HamburgerBar.jsx";
+import Background from "../components/common/Background/index.jsx";
 import { IoMdHome } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 

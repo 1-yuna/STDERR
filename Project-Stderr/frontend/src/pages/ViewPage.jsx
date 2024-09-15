@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import Background from "../components/Background";
-import TopBar from "../components/Bar/TopBar.jsx";
-import Question from "../components/View/Question.jsx";
-import ViewCode from "../components/View/ViewCode.jsx";
-import ViewTitle from "../components/View/ViewTitle.jsx";
-import PostBtn from "../components/Write/PostBtn.jsx";
-import Reply from "../components/View/Reply.jsx";
+import Background from "../components/common/Background";
+import TopBar from "../components/common/Bar/TopBar.jsx";
+import Question from "../components/common/View/Question.jsx";
+import ViewCode from "../components/common/View/ViewCode.jsx";
+import ViewTitle from "../components/common/View/ViewTitle.jsx";
+import PostBtn from "../components/common/Write/PostBtn.jsx";
+import Reply from "../components/common/View/Reply.jsx";
 
 function ViewPage() {
   return (

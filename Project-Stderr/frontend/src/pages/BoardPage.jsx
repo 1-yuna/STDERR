@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import Background from "../components/Background";
-import TopBar from "../components/Bar/TopBar.jsx";
-import Post from "../components/View/Post.jsx";
+import Background from "../components/common/Background";
+import TopBar from "../components/common/Bar/TopBar.jsx";
+import Post from "../components/common/View/Post.jsx";
 import styled from "styled-components";
 
 const CategoryBox = styled.div`

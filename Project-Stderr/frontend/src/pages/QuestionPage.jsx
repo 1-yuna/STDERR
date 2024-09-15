@@ -1,15 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import Background from "../components/Background";
-import TopBar from "../components/Bar/TopBar.jsx";
-import Dropdown from "../components/Dropdown/index.jsx";
+import Background from "../components/common/Background";
+import TopBar from "../components/common/Bar/TopBar.jsx";
+import Dropdown from "../components/common/Dropdown/index.jsx";
 import styled from "styled-components";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { MdOutlineArrowDropUp } from "react-icons/md";
-import TitleTag from "../components/Write/TitleTag.jsx";
-import WriteComment from "../components/Write/WriteComment.jsx";
-import WriteCode from "../components/Write/WriteCode.jsx";
-import PostBtn from "../components/Write/PostBtn.jsx";
+import TitleTag from "../components/common/Write/TitleTag.jsx";
+import WriteComment from "../components/common/Write/WriteComment.jsx";
+import WriteCode from "../components/common/Write/WriteCode.jsx";
+import PostBtn from "../components/common/Write/PostBtn.jsx";
 
 const TopBox = styled.div`
   display: flex;

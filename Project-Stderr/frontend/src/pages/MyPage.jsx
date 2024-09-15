@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
-import MyPageBackground from "../components/Background/MyPageBackground.jsx";
-import TopBar from "../components/Bar/TopBar.jsx";
+import MyPageBackground from "../components/common/Background/MyPageBackground.jsx";
+import TopBar from "../components/common/Bar/TopBar.jsx";
 import { GoCopilot } from "react-icons/go";
 import { MdOutlineEngineering } from "react-icons/md";
 import { TbMoodKid } from "react-icons/tb";

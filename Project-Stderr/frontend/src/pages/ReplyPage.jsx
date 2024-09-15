@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import Background from "../components/Background";
-import TopBar from "../components/Bar/TopBar.jsx";
-import ViewTitle from "../components/View/ViewTitle.jsx";
-import Question from "../components/View/Question.jsx";
-import ViewCode from "../components/View/ViewCode.jsx";
-import WriteComment from "../components/Write/WriteComment.jsx";
-import WriteCode from "../components/Write/WriteCode.jsx";
-import PostBtn from "../components/Write/PostBtn.jsx";
+import Background from "../components/common/Background";
+import TopBar from "../components/common/Bar/TopBar.jsx";
+import ViewTitle from "../components/common/View/ViewTitle.jsx";
+import Question from "../components/common/View/Question.jsx";
+import ViewCode from "../components/common/View/ViewCode.jsx";
+import WriteComment from "../components/common/Write/WriteComment.jsx";
+import WriteCode from "../components/common/Write/WriteCode.jsx";
+import PostBtn from "../components/common/Write/PostBtn.jsx";
 
 function ReplyPage() {
   return (
