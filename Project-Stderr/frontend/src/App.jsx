@@ -17,7 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/board" element={<BoardPage />} />
+          <Route path="/board/:categoryId" element={<BoardPage />} />
           <Route path="/question" element={<QuestionPage />} />
           <Route path="/reply" element={<ReplyPage />} />
           <Route path="/view" element={<ViewPage />} />

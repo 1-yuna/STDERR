@@ -1,10 +1,9 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import HamburgerBar from "../components/common/Bar/HamburgerBar.jsx";
 import Background from "../components/common/Background/index.jsx";
-import { IoMdHome } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 
 const DivBox = styled.div`
@@ -83,123 +82,6 @@ const TopBox = styled.div`
   color: white;
   z-index: 1000;
   padding: 0 21px;
-`;
-
-const Sidebar = styled.div`
-  position: fixed;
-  padding-top: 80px;
-  top: 0;
-  left: ${(props) => (props.isOpen ? "0" : "-350px")};
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 350px;
-  height: 100vh;
-  background-color: #8145cd;
-  border-right: 2px solid #fff;
-  color: white;
-  transition: left 0.3s ease;
-`;
-
-const HomeButton = styled.button`
-  display: flex;
-  justify-content: flex-start;
-  text-align: left;
-  background-color: #8145cd;
-  border-bottom: 2px solid #ffffff;
-  width: 100%;
-  height: 50px;
-  padding: 10px 20px;
-`;
-
-const ColoredHome = styled(IoMdHome)`
-  color: #ffffff;
-`;
-
-const Home = styled.div`
-  margin-left: 5px;
-  margin-top: 7px;
-  font-weight: bold;
-  font-size: 15px;
-  color: #fff;
-`;
-
-const LanguagesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #8145cd;
-  width: 100%;
-  height: 400px;
-`;
-
-const CategoryFont = styled.div`
-  font-weight: bold;
-  font-size: 20px;
-  color: #fff;
-  padding: 7px 20px;
-  border-bottom: 2px solid #ffffff;
-`;
-
-const LanguagesBox = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 10px;
-  width: 100%;
-  height: 60px;
-  border-bottom: 2px solid #ffffff;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-  &:hover {
-    background-color: #ffffff;
-    border-color: #ffffff;
-  }
-`;
-
-const LanguagesName = styled.button`
-  font-weight: bold;
-  font-size: 15px;
-  color: #fff;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-  ${LanguagesBox}:hover & {
-    color: #8145cd;
-  }
-`;
-
-const CommunicateContainer = styled.div`
-  width: 100%;
-  height: 100px;
-`;
-
-const CommunicateBox = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 10px;
-  width: 100%;
-  height: 60px;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-  &:hover {
-    background-color: #ffffff;
-    border-color: #ffffff;
-  }
-`;
-
-const ForumName = styled.button`
-  font-weight: bold;
-  font-size: 15px;
-  color: #fff;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-  ${CommunicateBox}:hover & {
-    color: #8145cd;
-  }
 `;
 
 const LogoContainer = styled.div`
@@ -456,16 +338,7 @@ const MemorizeId = styled.div`
 `;
 
 function HomePage() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -486,7 +359,7 @@ function HomePage() {
   };
 
   return (
-    <PageSetting onClick={closeSidebar}>
+    <PageSetting>
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>STDERR</title>
@@ -496,48 +369,9 @@ function HomePage() {
         <ErrorDeco2>403: Forbidden</ErrorDeco2>
         <ErrorDeco3>504: Gate found</ErrorDeco3>
         <TopBox>
-          <HamburgerBar
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleSidebar();
-            }}
-            isOpen={isSidebarOpen}
-          ></HamburgerBar>
-
-          <Sidebar isOpen={isSidebarOpen} onClick={(e) => e.stopPropagation()}>
-            <HomeButton>
-              <ColoredHome size={24} />
-              <Home>Home</Home>
-            </HomeButton>
-            <LanguagesContainer>
-              <CategoryFont>Languages</CategoryFont>
-              <LanguagesBox>
-                <LanguagesName>C / C++ / C#</LanguagesName>
-              </LanguagesBox>
-              <LanguagesBox>
-                <LanguagesName>Java / Kotlin</LanguagesName>
-              </LanguagesBox>
-              <LanguagesBox>
-                <LanguagesName>Python</LanguagesName>
-              </LanguagesBox>
-              <LanguagesBox>
-                <LanguagesName>Go / Rust / Zig</LanguagesName>
-              </LanguagesBox>
-              <LanguagesBox>
-                <LanguagesName>Swift</LanguagesName>
-              </LanguagesBox>
-              <LanguagesBox>
-                <LanguagesName>etc.</LanguagesName>
-              </LanguagesBox>
-            </LanguagesContainer>
-            <CommunicateContainer>
-              <CategoryFont>Communicate</CategoryFont>
-              <CommunicateBox>
-                <ForumName>Forum</ForumName>
-              </CommunicateBox>
-            </CommunicateContainer>
-          </Sidebar>
+          <HamburgerBar />
         </TopBox>
+
         <CenterContainer>
           <LogoContainer>
             <Logo src={"/STDERR_LOGO.png"} alt="로고" />
