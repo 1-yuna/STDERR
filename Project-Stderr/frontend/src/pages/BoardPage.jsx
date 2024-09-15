@@ -25,7 +25,6 @@ const Category = styled.div`
 
 function BoardPage() {
   const { categoryId } = useParams();
-  // const categoryIdNumber = Number(categoryId);
   const [categoryData, setCategoryData] = useState(null);
 
   useEffect(() => {
@@ -62,11 +61,11 @@ function BoardPage() {
             <Category> {categoryData.categoryName} </Category>
           </CategoryBox>
           {categoryData.posts.map((post) => (
-            <Post key={post.postId} post={post} />
+            <Post key={post.postId} post={post} categoryId={categoryId} />
           ))}
         </>
       ) : (
-        <p>Loading...</p>
+        <p></p>
       )}
     </Background>
   );

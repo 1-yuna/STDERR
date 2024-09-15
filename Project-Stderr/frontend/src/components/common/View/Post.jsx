@@ -14,11 +14,6 @@ const PostBox = styled.div`
   width: 100%;
   height: 200px;
   border-bottom: 1px solid #d9d9d9;
-  ${(props) =>
-    props.first &&
-    css`
-      border-top: 1px solid #d9d9d9;
-    `}
 `;
 
 const TitleCommentBox = styled.div`
@@ -129,11 +124,10 @@ const ReplyCount = styled.div`
   cursor: default;
 `;
 
-// eslint-disable-next-line react/prop-types
-function Post({ post }) {
+function Post({ post, categoryId }) {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/view"); // 클릭 시 "/newpage"로 이동
+    navigate(`/view/${categoryId}/${post.postId}`); // 클릭 시 "/newpage"로 이동
   };
 
   return (

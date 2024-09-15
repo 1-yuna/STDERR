@@ -20,12 +20,10 @@ function App() {
           <Route path="/board/:categoryId" element={<BoardPage />} />
           <Route path="/question" element={<QuestionPage />} />
           <Route path="/reply" element={<ReplyPage />} />
-          <Route path="/view" element={<ViewPage />} />
+          <Route path="/view/:categoryId/:postId" element={<ViewPage />} />
           <Route path="/my" element={<MyPage />} />
           <Route path="/join" element={<JoinPage />} />
-          {/*path="/board/:category_id"*/}
           {/*path="/reply/:category_id/:question_id"*/}
-          {/*path="/view/:category_id/:question_id"*/}
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
