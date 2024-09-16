@@ -26,6 +26,8 @@ public class User {
     @Column(unique = true)
     private String username;
     private String email;
+
+    @JsonIgnore // json으로 변환될때 제거
     private String password;
     private String name;
     private String profileImage;

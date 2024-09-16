@@ -28,8 +28,8 @@ public class SecurityConfig {
 
         http.addFilterBefore(new JwtFilter(), ExceptionTranslationFilter.class);
         http.authorizeHttpRequests((authorize) ->
-                authorize.requestMatchers("/api/user/join", "/api/user/login", "/api/category/**", "/api/post").permitAll()    // 2. 모든 url 로그인 검사기능 끄기
-                        .requestMatchers(HttpMethod.GET, "/api/post/**").permitAll()
+                authorize.requestMatchers("/api/**").permitAll()    // 2. 모든 url 로그인 검사기능 끄기
+                        // .requestMatchers(HttpMethod.GET, "/api/post/**").permitAll()
                         .anyRequest().authenticated()
         );
 

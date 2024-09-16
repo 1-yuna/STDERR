@@ -37,7 +37,7 @@ public class MyUserDetailsService implements UserDetailsService {
         authorities.add(new SimpleGrantedAuthority("일반유저"));
 
         // 2. return new User(유저아이디, 비번, 권한) 해주세요
-        return new CustomUser(user.getUsername(),user.getPassword(), authorities);
+        return new CustomUser(user.getUserId(), user.getUsername(),user.getPassword(), authorities);
 
 
     }

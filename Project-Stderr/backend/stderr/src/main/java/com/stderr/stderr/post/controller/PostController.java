@@ -1,5 +1,6 @@
 package com.stderr.stderr.post.controller;
 
+import com.stderr.stderr.post.dto.PostAuthResponseDTO;
 import com.stderr.stderr.post.dto.PostRequestDTO;
 import com.stderr.stderr.post.dto.PostResponseDTO;
 import com.stderr.stderr.post.entity.Post;
@@ -8,13 +9,17 @@ import com.stderr.stderr.category.entity.Category;
 import com.stderr.stderr.category.repository.CategoryRepository;
 import com.stderr.stderr.tag.entity.Tag;
 import com.stderr.stderr.tag.repository.TagRepository;
+import com.stderr.stderr.user.dto.CustomUser;
 import com.stderr.stderr.user.entity.User;
 import com.stderr.stderr.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.Authenticator;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -102,13 +107,33 @@ public class PostController {
 
     // 게시물 상세정보
     @GetMapping("api/post/{postId}")
-    public ResponseEntity<Post> getPost(@PathVariable long postId){
-
+    public ResponseEntity<Post> getPost(@PathVariable long postId,@AuthenticationPrincipal Authentication authentication){
+        // 인증되지 않은 경우 처리
+        // 인증되지 않은 경우 처리
+       // System.out.println("dsada"+ authentication);
+//        if (authentication == null || !authentication.isAuthenticated()) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//
+//        }
+        // 게시물 가져오기
         Optional<Post> postOptional = postRepository.findById(postId);
+
 
         if (postOptional.isPresent()) {
             Post post = postOptional.get();
+
+            // 현재 인증된 유저
+//            CustomUser user = (CustomUser) authentication.getPrincipal();
+//            Long currentUserId = user.getUserId();
+
+           //  System.out.println("dsada"+ currentUserId);
+            // 글 유저
+            // 게시물 작성자와 로그인한 사용자 비교
+           //  boolean isAuthor = post.getUser().getUserId().equals(currentUserId);
+         //   PostAuthResponseDTO postResponse = new PostAuthResponseDTO(isAuthor, post);
+
             return ResponseEntity.ok(post);
+
 
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // HTTP 404 Not Found 응답

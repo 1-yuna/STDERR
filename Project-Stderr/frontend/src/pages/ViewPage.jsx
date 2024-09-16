@@ -10,8 +10,13 @@ import Reply from "../components/common/View/Reply.jsx";
 import { useParams } from "react-router-dom";
 
 function ViewPage() {
+  const token = localStorage.getItem("token");
+  console.log(token);
+
   const { postId } = useParams();
   const [postData, setPostData] = useState(null);
+
+  console.log(postId);
 
   useEffect(() => {
     const fetchPostData = async () => {
@@ -20,12 +25,17 @@ function ViewPage() {
           `http://localhost:8080/api/post/${postId}`,
           {
             method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // JWT를 Authorization 헤더에 추가
+            },
           },
         );
 
         if (response.ok) {
           const data = await response.json();
           setPostData(data);
+          // console.log(postData);
         } else {
           console.error("Server responded with status:", response.status);
         }

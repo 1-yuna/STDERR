@@ -36,6 +36,7 @@ public class JwtUtil {
                 .map(a -> a.getAuthority()).collect(Collectors.joining(","));
 
         String jwt = Jwts.builder()
+                .claim("userId", user.getUserId())
                 .claim("username", user.getUsername())   //입장권에 집어넣을 정보 넣기  +누구나 볼 수 있기 때문에 비밀번호는 적지 마셈
                 .claim("authorities", authorities)
                 .issuedAt(new Date(System.currentTimeMillis()))  // 언제 발행

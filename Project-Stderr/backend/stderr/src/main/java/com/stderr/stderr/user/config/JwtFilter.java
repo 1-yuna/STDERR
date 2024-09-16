@@ -65,6 +65,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         // JWT에서 사용자 정보와 권한 추출
+        Long userId = claims.get("userId", Long.class);
         String username = claims.get("username", String.class);
         String authoritiesString = claims.get("authorities", String.class);
 
@@ -73,7 +74,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 .collect(Collectors.toList());
 
         // CustomUser 객체 생성
-        CustomUser customUser = new CustomUser(username, "", authorities);
+        CustomUser customUser = new CustomUser(userId, username, "", authorities);
 
         // UsernamePasswordAuthenticationToken 생성
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

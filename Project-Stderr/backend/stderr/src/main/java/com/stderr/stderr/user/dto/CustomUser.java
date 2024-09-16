@@ -12,11 +12,13 @@ import java.util.List;
 @Setter
 @ToString
 public class CustomUser implements UserDetails {
+    private Long userId;
     private String username;
     private String password;
     private List<GrantedAuthority> authorities;
 
-    public CustomUser(String username, String password, List<GrantedAuthority> authorities) {
+    public CustomUser(Long userId,String username, String password, List<GrantedAuthority> authorities) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
