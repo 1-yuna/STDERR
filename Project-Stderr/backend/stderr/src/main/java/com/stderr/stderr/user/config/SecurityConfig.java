@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.naming.factory.BeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,7 +28,8 @@ public class SecurityConfig {
 
         http.addFilterBefore(new JwtFilter(), ExceptionTranslationFilter.class);
         http.authorizeHttpRequests((authorize) ->
-                authorize.requestMatchers("/api/**").permitAll()    // 2. 모든 url 로그인 검사기능 끄기
+                authorize.requestMatchers("/api/user/join", "/api/user/login", "/api/category/**", "/api/post").permitAll()    // 2. 모든 url 로그인 검사기능 끄기
+                        .requestMatchers(HttpMethod.GET, "/api/post/**").permitAll()
                         .anyRequest().authenticated()
         );
 

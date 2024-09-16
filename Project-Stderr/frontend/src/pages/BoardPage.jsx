@@ -24,11 +24,10 @@ const Category = styled.div`
 `;
 
 function BoardPage() {
-  const { categoryId } = useParams();
-  const [categoryData, setCategoryData] = useState(null);
   const token = localStorage.getItem("token");
 
-  console.log("???", token);
+  const { categoryId } = useParams();
+  const [categoryData, setCategoryData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {

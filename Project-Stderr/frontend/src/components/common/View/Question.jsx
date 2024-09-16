@@ -59,9 +59,11 @@ const FirstBox = styled.div`
 `;
 
 const TagBox = styled.div`
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
+  margin-right: 5px;
+  padding: 0 5px;
   width: 60px;
   height: 100%;
   background-color: #f3ecff;
@@ -136,7 +138,7 @@ const HeartCount = styled.div`
 `;
 
 // eslint-disable-next-line react/prop-types
-function Question({ content, heart, likes }) {
+function Question({ content, heart, likes, tags }) {
   // 좋아요
   const [heartClicked, setHeartClicked] = useState(false);
   const [count, setCount] = useState(likes);
@@ -166,7 +168,9 @@ function Question({ content, heart, likes }) {
       </TextBox>
       <BottomBox>
         <FirstBox>
-          <TagBox>#Kotlin</TagBox>
+          {tags.map((tag) => (
+            <TagBox key={tag.tagId}>{tag.tagName}</TagBox>
+          ))}
         </FirstBox>
         <SecondBox>
           {showButton && (

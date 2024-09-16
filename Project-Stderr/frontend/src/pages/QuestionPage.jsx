@@ -73,6 +73,8 @@ const RuleText = styled.div`
 `;
 
 function QuestionPage() {
+  const token = localStorage.getItem("token");
+
   //드롭다운
   const [view, setView] = useState(false);
   const [selectedOption, setSelectedOption] = useState("C / C++ / C#");
@@ -146,6 +148,7 @@ function QuestionPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(postData),
       });

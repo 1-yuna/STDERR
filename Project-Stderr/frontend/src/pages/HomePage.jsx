@@ -5,6 +5,7 @@ import styled from "styled-components";
 import HamburgerBar from "../components/common/Bar/HamburgerBar.jsx";
 import Background from "../components/common/Background/index.jsx";
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const DivBox = styled.div`
   display: flex;
@@ -338,12 +339,16 @@ const MemorizeId = styled.div`
 `;
 
 function HomePage() {
-  // 모달 창
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  console.log(token);
 
   // 로그인
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  // 모달 창
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -383,9 +388,10 @@ function HomePage() {
 
       if (response.ok) {
         const token = await response.text();
-        console.log(token);
         localStorage.setItem("token", token);
+        console.log(token);
         alert("로그인이 완료되었습니다.");
+        setIsModalOpen(false); // 모달창 닫기
       } else {
         console.error("Failed to submit post:", response.status);
         alert("회원이 아닙니다.");
@@ -393,6 +399,12 @@ function HomePage() {
     } catch (error) {
       console.error("Error submitting post:", error);
     }
+  };
+
+  // 로그아웃
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/"); // 로그아웃 후 홈 페이지로 이동
   };
 
   return (
@@ -421,8 +433,19 @@ function HomePage() {
               </SearchBar>
             </DivBox1>
             <DivBox2>
-              <LoginButton onClick={openModal}>Login</LoginButton>
-              <LoginButton onClick={gotoSignup}>Sign up</LoginButton>
+              {token ? (
+                <>
+                  <LoginButton onClick={() => navigate("/question")}>
+                    question
+                  </LoginButton>
+                  <LoginButton onClick={handleLogout}>logout</LoginButton>
+                </>
+              ) : (
+                <>
+                  <LoginButton onClick={openModal}>Login</LoginButton>
+                  <LoginButton onClick={gotoSignup}>Sign up</LoginButton>
+                </>
+              )}
             </DivBox2>
           </DivContainer>
         </CenterContainer>

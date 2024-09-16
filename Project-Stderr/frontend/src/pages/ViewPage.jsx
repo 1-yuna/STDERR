@@ -48,6 +48,7 @@ function ViewPage() {
         content={postData.content}
         heart={true}
         likes={postData.likes}
+        tags={postData.tags}
       />
       <ViewCode code={postData.code} />
       <PostBtn name="Reply" route="replyPage" />
