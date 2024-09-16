@@ -18,6 +18,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
@@ -31,7 +33,7 @@ public class UserController {
     public ResponseEntity<String> joinPost(@RequestBody JoinRequestDTO joinRequestDTO) {
 
         User user = new User();
-        user.setUserName(joinRequestDTO.getUserName());
+        user.setUsername(joinRequestDTO.getUsername());
         user.setEmail(joinRequestDTO.getEmail());
 
         var result = passwordEncoder.encode(joinRequestDTO.getPassword());
@@ -43,7 +45,31 @@ public class UserController {
         return ResponseEntity.ok("Successfully");
     }
 
-    @PostMapping("/api/login")
+    @PostMapping("/api/user/login")
     public String joinPost(@RequestBody Map<String,String> data, HttpServletResponse response) {
 
+        // 로그인 시켜주세요
+        var authToken = new UsernamePasswordAuthenticationToken(
+                data.get("username"), data.get("password")
+        );
+
+        // 사용자 인증 시도(비교)
+        var auth = authenticationManager.authenticate(authToken);
+        // SecurityContext에 Authentication(auth) 저장
+        SecurityContextHolder.getContext().setAuthentication(auth);
+
+
+        // Token 발급(auth 보내줌)
+        var jwt = JwtUtil.createToken(SecurityContextHolder.getContext().getAuthentication());
+
+        var cookie = new Cookie("jwt", jwt);  // 쿠키이름, 값
+        cookie.setMaxAge(360); // 쿠키의 유효기간 (10)초 -> jwt 유효기간이랑 비슷하게
+        cookie.setHttpOnly(true);   // 해킹->자바스크립트 조작하기 어려워짐
+        cookie.setPath("/");  // 경로 (쿠키가 전송될 url ) -> 모든 url에 전송
+        response.addCookie(cookie); // 유저 브라우저에 쿠키 강제 저장
+
+        System.out.println(jwt);
+        return jwt;
+
+    }
 }

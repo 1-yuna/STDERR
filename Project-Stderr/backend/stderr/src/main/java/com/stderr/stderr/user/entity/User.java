@@ -24,7 +24,7 @@ public class User {
     private Long userId;
 
     @Column(unique = true)
-    private String userName;
+    private String username;
     private String email;
     private String password;
     private String name;

@@ -161,13 +161,13 @@ function JoinPage() {
       return;
     }
     const UserData = {
-      userName: userId,
+      username: userId,
       email: userEmail,
       password: userPwd,
       name: userName,
     };
 
-    console.log("??", UserData);
+    console.log("user data", UserData);
 
     try {
       const response = await fetch(`http://localhost:8080/api/user/join`, {
