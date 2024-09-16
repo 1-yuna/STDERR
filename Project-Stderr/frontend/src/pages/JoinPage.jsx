@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Background from "../components/common/Background";
 import SignupBar from "../components/common/Bar/SignupBar.jsx";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const PageSetting = styled.div`
   display: flex;
@@ -85,6 +86,8 @@ const TopBox = styled.div`
 `;
 
 function JoinPage() {
+  const navigate = useNavigate();
+
   const [userId, setUserId] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPwd, setUserPwd] = useState("");
@@ -152,6 +155,41 @@ function JoinPage() {
     setPasswordReStrength(strength);
   }, [userPwd, userPwdRe]);
 
+  const handleJoin = async () => {
+    if (userPwdRe !== userPwd) {
+      alert("비밀번호를 다시 확인해주세요.");
+      return;
+    }
+    const UserData = {
+      userName: userId,
+      email: userEmail,
+      password: userPwd,
+      name: userName,
+    };
+
+    console.log("??", UserData);
+
+    try {
+      const response = await fetch(`http://localhost:8080/api/user/join`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(UserData),
+      });
+
+      if (response.ok) {
+        console.log("200");
+        alert("회원가입이 완료되었습니다!");
+        navigate(-1);
+      } else {
+        console.error("Failed to submit post:", response.status);
+      }
+    } catch (error) {
+      console.error("Error submitting post:", error);
+    }
+  };
+
   return (
     <Background>
       <TopBox>
@@ -192,7 +230,7 @@ function JoinPage() {
         </DivBox1>
         <DivBox2>
           <CloudFlareBox />
-          <SignupButton>Sign up</SignupButton>
+          <SignupButton onClick={handleJoin}>Sign up</SignupButton>
         </DivBox2>
       </PageSetting>
     </Background>

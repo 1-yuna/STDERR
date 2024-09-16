@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class JoinRequestDTO {
-    private String username;
+    private String userName;
     private String email;
     private String password;
     private String name;
