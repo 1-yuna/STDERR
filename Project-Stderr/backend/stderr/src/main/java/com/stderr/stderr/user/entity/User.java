@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.List;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,7 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Post> posts = new ArrayList<>();
+
 
 
 }
