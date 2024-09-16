@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @PostMapping("/api/user/login")
-    public String joinPost(@RequestBody Map<String,String> data, HttpServletResponse response) {
+    public ResponseEntity<String> joinPost(@RequestBody Map<String,String> data, HttpServletResponse response) {
 
         // 로그인 시켜주세요
         var authToken = new UsernamePasswordAuthenticationToken(
@@ -69,7 +69,7 @@ public class UserController {
         response.addCookie(cookie); // 유저 브라우저에 쿠키 강제 저장
 
         System.out.println(jwt);
-        return jwt;
+        return ResponseEntity.ok(jwt);
 
     }
 }

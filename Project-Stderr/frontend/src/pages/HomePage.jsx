@@ -338,7 +338,12 @@ const MemorizeId = styled.div`
 `;
 
 function HomePage() {
+  // 모달 창
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 로그인
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -356,6 +361,38 @@ function HomePage() {
 
   const toggleCheck = () => {
     setIsChecked(!isChecked);
+  };
+
+  // 로그인
+  const handleLogin = async () => {
+    const UserLogin = {
+      username,
+      password,
+    };
+
+    console.log("로그인", UserLogin);
+
+    try {
+      const response = await fetch(`http://localhost:8080/api/user/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(UserLogin),
+      });
+
+      if (response.ok) {
+        const token = await response.text();
+        console.log(token);
+        localStorage.setItem("token", token);
+        alert("로그인이 완료되었습니다.");
+      } else {
+        console.error("Failed to submit post:", response.status);
+        alert("회원이 아닙니다.");
+      }
+    } catch (error) {
+      console.error("Error submitting post:", error);
+    }
   };
 
   return (
@@ -399,14 +436,22 @@ function HomePage() {
               <DivBox4>
                 <Label>ID</Label>
                 <LoginBar>
-                  <InputId />
+                  <InputId
+                    labelText="아이디"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
                 </LoginBar>
               </DivBox4>
               <LoginBarContainer>
                 <Label>Password</Label>
                 <DivBox>
                   <LoginBar>
-                    <InputId />
+                    <InputId
+                      labelText="비밀번호"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
                   </LoginBar>
                   <Label>
                     <CheckBox checked={isChecked} onClick={toggleCheck}>
@@ -417,7 +462,7 @@ function HomePage() {
                 </DivBox>
               </LoginBarContainer>
             </DivBox3>
-            <LoginButton>Login</LoginButton>
+            <LoginButton onClick={handleLogin}>Login</LoginButton>
           </ModalBox>
         </Modal>
       </ModalBackground>

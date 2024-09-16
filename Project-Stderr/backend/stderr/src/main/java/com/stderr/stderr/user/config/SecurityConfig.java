@@ -27,7 +27,7 @@ public class SecurityConfig {
 
         http.addFilterBefore(new JwtFilter(), ExceptionTranslationFilter.class);
         http.authorizeHttpRequests((authorize) ->
-                authorize.requestMatchers("/api/user/login", "/api/user/join").permitAll()    // 2. 모든 url 로그인 검사기능 끄기
+                authorize.requestMatchers("/api/**").permitAll()    // 2. 모든 url 로그인 검사기능 끄기
                         .anyRequest().authenticated()
         );
 

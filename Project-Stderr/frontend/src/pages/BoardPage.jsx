@@ -26,6 +26,9 @@ const Category = styled.div`
 function BoardPage() {
   const { categoryId } = useParams();
   const [categoryData, setCategoryData] = useState(null);
+  const token = localStorage.getItem("token");
+
+  console.log("???", token);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +37,9 @@ function BoardPage() {
           `http://localhost:8080/api/category/${categoryId}`,
           {
             method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`, // JWT를 Authorization 헤더에 추가
+            },
           },
         );
 
