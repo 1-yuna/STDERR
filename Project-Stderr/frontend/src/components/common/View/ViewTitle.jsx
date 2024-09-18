@@ -44,7 +44,8 @@ const RemoveButton = styled.button`
 `;
 
 // eslint-disable-next-line react/prop-types
-function ViewTitle({ title, postId }) {
+function ViewTitle({ title, postId, authorData }) {
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   const handleRemove = async () => {
@@ -53,6 +54,10 @@ function ViewTitle({ title, postId }) {
         `http://localhost:8080/api/post/${postId}`, // 삭제할 포스트의 URL
         {
           method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         },
       );
 
@@ -76,10 +81,12 @@ function ViewTitle({ title, postId }) {
   return (
     <ViewTitleBody>
       {title}
-      <DivBox>
-        <EditButton onClick={handleClick}>Edit</EditButton>/
-        <RemoveButton onClick={handleRemove}> Remove</RemoveButton>
-      </DivBox>
+      {authorData && (
+        <DivBox>
+          <EditButton onClick={handleClick}>Edit</EditButton>/
+          <RemoveButton onClick={handleRemove}>Remove</RemoveButton>
+        </DivBox>
+      )}
     </ViewTitleBody>
   );
 }

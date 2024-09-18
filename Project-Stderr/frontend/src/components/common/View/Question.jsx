@@ -138,7 +138,7 @@ const HeartCount = styled.div`
 `;
 
 // eslint-disable-next-line react/prop-types
-function Question({ content, heart, likes, tags }) {
+function Question({ content = "", heart, likes, tags = [] }) {
   // 좋아요
   const [heartClicked, setHeartClicked] = useState(false);
   const [count, setCount] = useState(likes);

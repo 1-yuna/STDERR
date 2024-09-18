@@ -58,7 +58,7 @@ const CodeButton = styled.button`
 `;
 
 // eslint-disable-next-line react/prop-types
-function ViewCode({ code }) {
+function ViewCode({ code = "" }) {
   // 텍스트 높이 확장
   const [expanded, setExpanded] = useState(false);
 

@@ -74,6 +74,9 @@ const RuleText = styled.div`
 `;
 
 function QuestionPage() {
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
   // 드롭다운
   const [view, setView] = useState(false); //드롭다운
   const [selectedOption, setSelectedOption] = useState("C / C++ / C#");
@@ -85,8 +88,6 @@ function QuestionPage() {
   const [content, setContent] = useState("");
   const [code, setCode] = useState("");
   const [tags, setTags] = useState([]);
-
-  const navigate = useNavigate();
 
   const str =
     " 1. 문제 상황(제목)을 한 줄로 요약하기! \n 2. 문제에 대해 자세히 서술해주세요!\n 3. 본인이 하고자하는 바가 무엇인지도 서술해주세요! \n 4. 문제 상황과 관련있는 태그를 추가해주세요! \n 5. 글 올리기! \n";
@@ -103,17 +104,22 @@ function QuestionPage() {
           `http://localhost:8080/api/post/${postId}`,
           {
             method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
         );
 
         if (response.ok) {
           const data = await response.json();
-          setTitle(data.title);
-          setContent(data.content);
-          setCode(data.code);
+          setTitle(data.post.title);
+          setContent(data.post.content);
+          setCode(data.post.code);
           // 태그를 띄어쓰기로 구분된 문자열로 변환
           setTags(
-            data.tags ? data.tags.map((tag) => tag.tagName).join(" ") : [],
+            data.post.tags
+              ? data.post.tags.map((tag) => tag.tagName).join(" ")
+              : [],
           );
           console.log(data);
         } else {

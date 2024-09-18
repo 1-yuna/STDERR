@@ -392,6 +392,10 @@ function HomePage() {
         console.log(token);
         alert("로그인이 완료되었습니다.");
         setIsModalOpen(false); // 모달창 닫기
+      } else if (response.status === 401) {
+        alert("세션이 만료되었습니다. 다시 로그인해주세요.");
+        localStorage.removeItem("token");
+        navigate("/"); // 로그아웃 후 홈 페이지로 이동
       } else {
         console.error("Failed to submit post:", response.status);
         alert("회원이 아닙니다.");
@@ -403,6 +407,7 @@ function HomePage() {
 
   // 로그아웃
   const handleLogout = () => {
+    alert("로그아웃 되었습니다.");
     localStorage.removeItem("token");
     navigate("/"); // 로그아웃 후 홈 페이지로 이동
   };

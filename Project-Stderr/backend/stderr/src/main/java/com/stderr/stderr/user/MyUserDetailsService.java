@@ -36,8 +36,8 @@ public class MyUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();   // 권한을 적어놓은 list (GrantedAuthority: 권한 적으려면 적어야됨(강요) )
         authorities.add(new SimpleGrantedAuthority("일반유저"));
 
-        // 2. return new User(유저아이디, 비번, 권한) 해주세요
-        return new CustomUser(user.getUserId(), user.getUsername(),user.getPassword(), authorities);
+        // 2. return new User(유저 아이디, 비번, 권한) 해주세요
+        return new CustomUser( user.getUsername(),user.getPassword(), authorities);
 
 
     }

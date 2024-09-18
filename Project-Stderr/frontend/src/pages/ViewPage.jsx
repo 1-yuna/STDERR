@@ -11,10 +11,11 @@ import { useParams } from "react-router-dom";
 
 function ViewPage() {
   const token = localStorage.getItem("token");
-  console.log(token);
-
   const { postId } = useParams();
+
+  // request data
   const [postData, setPostData] = useState(null);
+  const [authorData, setAuthorData] = useState(false);
 
   console.log(postId);
 
@@ -34,8 +35,9 @@ function ViewPage() {
 
         if (response.ok) {
           const data = await response.json();
-          setPostData(data);
-          // console.log(postData);
+          setAuthorData(data.author);
+          setPostData(data.post);
+          console.log("data", data);
         } else {
           console.error("Server responded with status:", response.status);
         }
@@ -53,7 +55,11 @@ function ViewPage() {
   return (
     <Background>
       <TopBar isBackBtn={true} />
-      <ViewTitle title={postData.title} postId={postId} />
+      <ViewTitle
+        title={postData.title}
+        authorData={authorData}
+        postId={postId}
+      />
       <Question
         content={postData.content}
         heart={true}

@@ -32,32 +32,42 @@ public class JwtFilter extends OncePerRequestFilter {
 
         System.out.println("필터 실행됨");
 
-        // 쿠키 (토큰) 가져옴
-        Cookie[] cookies = request.getCookies();   // request 변수를 사용하여 쿠키 가져옴
+        // Authorization 헤더에서 토큰 가져오기
+        String jwtToken = request.getHeader("Authorization");
 
-        if (cookies == null) {
+        if (jwtToken == null || !jwtToken.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        // 이름이 jwt인 토큰 찾기
-        String jwtCookie = "";
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("jwt")) {
-                jwtCookie = cookie.getValue();
-                break;
-            }
-        }
+        jwtToken = jwtToken.substring(7); // "Bearer " 접두사 제거
 
-        if (jwtCookie.isEmpty()) {
-            filterChain.doFilter(request, response);
-            return;
-        }
+//        // 쿠키 (토큰) 가져옴
+//        Cookie[] cookies = request.getCookies();   // request 변수를 사용하여 쿠키 가져옴
+//
+//        if (cookies == null) {
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
+//
+//        // 이름이 jwt인 토큰 찾기
+//        String jwtCookie = "";
+//        for (Cookie cookie : cookies) {
+//            if (cookie.getName().equals("jwt")) {
+//                jwtCookie = cookie.getValue();
+//                break;
+//            }
+//        }
+//
+//        if (jwtCookie.isEmpty()) {
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
 
         // 유효기간 등 확인
         Claims claims;
         try {
-            claims = JwtUtil.extractToken(jwtCookie);
+            claims = JwtUtil.extractToken(jwtToken);
         } catch (Exception e) {
             System.out.println("유효기간 만료되거나 이상함");
             filterChain.doFilter(request, response);
@@ -65,7 +75,6 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         // JWT에서 사용자 정보와 권한 추출
-        Long userId = claims.get("userId", Long.class);
         String username = claims.get("username", String.class);
         String authoritiesString = claims.get("authorities", String.class);
 
@@ -74,7 +83,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 .collect(Collectors.toList());
 
         // CustomUser 객체 생성
-        CustomUser customUser = new CustomUser(userId, username, "", authorities);
+        CustomUser customUser = new CustomUser( username, "", authorities);
 
         // UsernamePasswordAuthenticationToken 생성
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
@@ -83,8 +92,11 @@ public class JwtFilter extends OncePerRequestFilter {
                 authorities
         );
 
+
         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authToken);
+
+        System.out.println("Authentication 설정됨: " + authToken);
 
         filterChain.doFilter(request, response);
     }

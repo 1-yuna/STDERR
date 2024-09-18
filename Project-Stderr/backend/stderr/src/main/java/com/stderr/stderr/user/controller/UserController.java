@@ -48,25 +48,25 @@ public class UserController {
     @PostMapping("/api/user/login")
     public ResponseEntity<String> joinPost(@RequestBody Map<String,String> data, HttpServletResponse response) {
 
-        // 로그인 시켜주세요
+        // 인증 정보
         var authToken = new UsernamePasswordAuthenticationToken(
                 data.get("username"), data.get("password")
         );
 
-        // 사용자 인증 시도(비교)
+        // 1. 사용자 인증 (authenticationManager 이용)
         var auth = authenticationManager.authenticate(authToken);
-        // SecurityContext에 Authentication(auth) 저장
+        // 2. 인증된 사용자 정보를 SecurityContext에 저장
         SecurityContextHolder.getContext().setAuthentication(auth);
 
 
-        // Token 발급(auth 보내줌)
+        // 3. jwt 생성
         var jwt = JwtUtil.createToken(SecurityContextHolder.getContext().getAuthentication());
 
-        var cookie = new Cookie("jwt", jwt);  // 쿠키이름, 값
-        cookie.setMaxAge(360); // 쿠키의 유효기간 (10)초 -> jwt 유효기간이랑 비슷하게
-        cookie.setHttpOnly(true);   // 해킹->자바스크립트 조작하기 어려워짐
-        cookie.setPath("/");  // 경로 (쿠키가 전송될 url ) -> 모든 url에 전송
-        response.addCookie(cookie); // 유저 브라우저에 쿠키 강제 저장
+//        var cookie = new Cookie("jwt", jwt);  // 쿠키이름, 값
+//        cookie.setMaxAge(360); // 쿠키의 유효기간 (10)초 -> jwt 유효기간이랑 비슷하게
+//        cookie.setHttpOnly(true);   // 해킹->자바스크립트 조작하기 어려워짐
+//        cookie.setPath("/");  // 경로 (쿠키가 전송될 url ) -> 모든 url에 전송
+//        response.addCookie(cookie); // 유저 브라우저에 쿠키 강제 저장
 
         System.out.println(jwt);
         return ResponseEntity.ok(jwt);

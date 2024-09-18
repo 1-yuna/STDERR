@@ -35,10 +35,13 @@ public class PostController {
 
     //게시물 post
     @PostMapping("/api/post")
-    public ResponseEntity<PostResponseDTO> creatPost(@RequestBody PostRequestDTO postRequestDTO){
+    public ResponseEntity<PostResponseDTO> creatPost(@RequestBody PostRequestDTO postRequestDTO, Authentication auth){
+
+        CustomUser userCustom = (CustomUser) auth.getPrincipal();
+        var username = userCustom.getUsername();
 
         Optional<Category> categoryOptional = categoryRepository.findById(postRequestDTO.getCategoryId());
-        Optional<User> userOptional = userRepository.findById(1L);  // 수정필요
+        Optional<User> userOptional = userRepository.findByUsername(username);  // 수정필요
 
         // 카운트 업데이트
         if (categoryOptional.isPresent()) {
@@ -107,32 +110,32 @@ public class PostController {
 
     // 게시물 상세정보
     @GetMapping("api/post/{postId}")
-    public ResponseEntity<Post> getPost(@PathVariable long postId,@AuthenticationPrincipal Authentication authentication){
+    public ResponseEntity<PostAuthResponseDTO> getPost(@PathVariable long postId,Authentication auth){
         // 인증되지 않은 경우 처리
-        // 인증되지 않은 경우 처리
-       // System.out.println("dsada"+ authentication);
-//        if (authentication == null || !authentication.isAuthenticated()) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//
-//        }
+        if (auth == null || !auth.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
         // 게시물 가져오기
         Optional<Post> postOptional = postRepository.findById(postId);
-
 
         if (postOptional.isPresent()) {
             Post post = postOptional.get();
 
             // 현재 인증된 유저
-//            CustomUser user = (CustomUser) authentication.getPrincipal();
-//            Long currentUserId = user.getUserId();
+             CustomUser user = (CustomUser) auth.getPrincipal();
+             var currentUsername = user.getUsername();
 
-           //  System.out.println("dsada"+ currentUserId);
+             System.out.println("있어요" + currentUsername);
+
             // 글 유저
             // 게시물 작성자와 로그인한 사용자 비교
-           //  boolean isAuthor = post.getUser().getUserId().equals(currentUserId);
-         //   PostAuthResponseDTO postResponse = new PostAuthResponseDTO(isAuthor, post);
+            boolean isAuthor = post.getUser().getUsername().equals(currentUsername);
 
-            return ResponseEntity.ok(post);
+            System.out.println("??" + post.getUser().getUsername() +"??"+ currentUsername);
+            System.out.println("비교" + isAuthor);
+            PostAuthResponseDTO postAuthResponseDTO = new PostAuthResponseDTO(isAuthor, post);
+
+            return ResponseEntity.ok(postAuthResponseDTO);
 
 
         } else {
