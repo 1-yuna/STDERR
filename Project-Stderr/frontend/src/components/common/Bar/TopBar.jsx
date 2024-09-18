@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import HamburgerBar from "./HamburgerBar.jsx";
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 // import { IoMdArrowBack } from "react-icons/io";
 // import { useNavigate } from "react-router-dom";
 
@@ -178,11 +179,17 @@ function TopBar({ isBackBtn }) {
     setIsSidebarOpen(false);
   };
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const handleGoBack = () => {
-  //   navigate(-1); // 이전 페이지로 이동
-  // };
+  const handleLogo = () => {
+    navigate("/");
+  };
+
+  const handleLogout = () => {
+    alert("로그아웃 되었습니다.");
+    localStorage.removeItem("token");
+    navigate("/"); // 로그아웃 후 홈 페이지로 이동
+  };
 
   return (
     <>
@@ -190,7 +197,11 @@ function TopBar({ isBackBtn }) {
         <DivBox>
           <HamburgerBar />
           <LogoBox>
-            <Logo src={"/STDERR_LOGO_concat_ver.png"} alt="로고" />
+            <Logo
+              src={"/STDERR_LOGO_concat_ver.png"}
+              alt="로고"
+              onClick={handleLogo}
+            />
           </LogoBox>
         </DivBox>
 
@@ -204,7 +215,7 @@ function TopBar({ isBackBtn }) {
           ) : (
             <>
               <MyPageButton>profile</MyPageButton>
-              <LogoutButton>logout</LogoutButton>
+              <LogoutButton onClick={handleLogout}>logout</LogoutButton>
             </>
           )}
         </ButtonBox>
