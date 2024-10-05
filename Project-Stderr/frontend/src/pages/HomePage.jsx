@@ -440,15 +440,15 @@ function HomePage() {
             <DivBox2>
               {token ? (
                 <>
+                  <LoginButton onClick={openModal}>Login</LoginButton>
+                  <LoginButton onClick={gotoSignup}>Sign up</LoginButton>
+                </>
+              ) : (
+                <>
                   <LoginButton onClick={() => navigate("/question")}>
                     question
                   </LoginButton>
                   <LoginButton onClick={handleLogout}>logout</LoginButton>
-                </>
-              ) : (
-                <>
-                  <LoginButton onClick={openModal}>Login</LoginButton>
-                  <LoginButton onClick={gotoSignup}>Sign up</LoginButton>
                 </>
               )}
             </DivBox2>

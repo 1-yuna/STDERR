@@ -45,6 +45,7 @@ function PostBtn({ name, route, onClick }) {
       navigate("/reply");
     }
   };
+
   return (
     <PostBtnBody>
       <PostBtnBox onClick={handleClick}>{name}</PostBtnBox>
