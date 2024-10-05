@@ -340,6 +340,7 @@ const MemorizeId = styled.div`
 
 function HomePage() {
   const token = localStorage.getItem("token");
+  console.log("토큰 있나요?", token);
   const navigate = useNavigate();
   console.log(token);
 
@@ -440,15 +441,15 @@ function HomePage() {
             <DivBox2>
               {token ? (
                 <>
-                  <LoginButton onClick={openModal}>Login</LoginButton>
-                  <LoginButton onClick={gotoSignup}>Sign up</LoginButton>
-                </>
-              ) : (
-                <>
                   <LoginButton onClick={() => navigate("/question")}>
                     question
                   </LoginButton>
                   <LoginButton onClick={handleLogout}>logout</LoginButton>
+                </>
+              ) : (
+                <>
+                  <LoginButton onClick={openModal}>Login</LoginButton>
+                  <LoginButton onClick={gotoSignup}>Sign up</LoginButton>
                 </>
               )}
             </DivBox2>
