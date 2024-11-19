@@ -7,12 +7,14 @@ import ViewCode from "../components/View/ViewCode.jsx";
 import ViewTitle from "../components/View/ViewTitle.jsx";
 import PostBtn from "../components/Write/PostBtn.jsx";
 import Reply from "../components/View/Reply.jsx";
+import UserProfile from "../components/View/UserProfile.jsx";
 
 function ViewPage() {
   return (
     <Background>
       <TopBar isBackBtn={true} />
       <ViewTitle title="Kotlin 회원가입 기능" />
+      <UserProfile></UserProfile>
       <Question heart={true} />
       <ViewCode />
       <PostBtn name="Reply" route="replyPage" />
