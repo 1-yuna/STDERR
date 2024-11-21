@@ -20,6 +20,7 @@ import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class PostController {
 
     private final TagRepository tagRepository;

@@ -31,7 +31,7 @@ const Text = styled.textarea`
   background-color: white;
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 12px;
   resize: none;
   &::placeholder {
     color: #bebebe;
@@ -39,12 +39,17 @@ const Text = styled.textarea`
 `;
 
 // eslint-disable-next-line react/prop-types
-function WriteComment({ name }) {
+function WriteComment({ name, value, onChange }) {
   return (
     <CommentBody>
       <Title>{name}</Title>
       <TextBox>
-        <Text type="text" placeholder="Comments.." />
+        <Text
+          type="text"
+          placeholder="Comments.."
+          value={value}
+          onChange={onChange}
+        />
       </TextBox>
     </CommentBody>
   );

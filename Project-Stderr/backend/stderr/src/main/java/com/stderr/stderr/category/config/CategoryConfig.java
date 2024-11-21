@@ -17,12 +17,11 @@ public class CategoryConfig {
     @PostConstruct
     public void init() {
         // 카테고리 데이터 추가
-        addCategory("C/C++/C#");
-        addCategory("Java/Kotlin");
+        addCategory("C / C++ / C#");
+        addCategory("Java / Kotlin");
         addCategory("Python");
-        addCategory("JavaScript");
-        addCategory("HTML/CSS");
-        addCategory("React/Vue");
+        addCategory("Go / Rust / Zig");
+        addCategory("Swift");
         addCategory("etc.");
         addCategory("Forum");
     }

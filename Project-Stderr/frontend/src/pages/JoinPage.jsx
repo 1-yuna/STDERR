@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
-import Background from "../components/Background";
-import SignupBar from "../components/Bar/SignupBar.jsx";
+import Background from "../components/common/Background";
+import SignupBar from "../components/common/Bar/SignupBar.jsx";
 import styled from "styled-components";
 
 const PageSetting = styled.div`
