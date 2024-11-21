@@ -176,8 +176,6 @@ function QuestionPage() {
       ...(tagArray.length > 0 && { tags: tagArray }), // tagArray가 비어있지 않으면 tags 필드를 추가
     };
 
-    console.log("??", postData);
-
     try {
       const response = await fetch(`http://localhost:8080/api/post/${postId}`, {
         method: "PUT",

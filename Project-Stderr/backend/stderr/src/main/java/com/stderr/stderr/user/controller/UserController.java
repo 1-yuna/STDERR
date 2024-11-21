@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserRepository userRepository;
@@ -25,7 +26,7 @@ public class UserController {
     public ResponseEntity<String> joinPost(@RequestBody JoinRequestDTO joinRequestDTO) {
 
         User user = new User();
-        user.setUsername(joinRequestDTO.getUsername());
+        user.setUserName(joinRequestDTO.getUserName());
         user.setEmail(joinRequestDTO.getEmail());
 
         var result = passwordEncoder.encode(joinRequestDTO.getPassword());
