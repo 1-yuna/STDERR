@@ -8,7 +8,7 @@ import ViewTitle from "../components/common/View/ViewTitle.jsx";
 import PostBtn from "../components/common/Write/PostBtn.jsx";
 import Reply from "../components/common/View/Reply.jsx";
 import { useParams } from "react-router-dom";
-import UserProfile from "../components/View/UserProfile.jsx";
+import UserProfile from "../components/common/View/UserProfile.jsx";
 
 function ViewPage() {
   const { postId } = useParams();
