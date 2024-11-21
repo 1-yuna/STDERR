@@ -8,6 +8,7 @@ import ViewTitle from "../components/common/View/ViewTitle.jsx";
 import PostBtn from "../components/common/Write/PostBtn.jsx";
 import Reply from "../components/common/View/Reply.jsx";
 import { useParams } from "react-router-dom";
+import UserProfile from "../components/View/UserProfile.jsx";
 
 function ViewPage() {
   const { postId } = useParams();
@@ -44,6 +45,7 @@ function ViewPage() {
     <Background>
       <TopBar isBackBtn={true} />
       <ViewTitle title={postData.title} postId={postId} />
+      <UserProfile></UserProfile>
       <Question
         content={postData.content}
         heart={true}
