@@ -47,7 +47,7 @@ public class CategoryController {
                         post.getContent(),
                         post.getCode(),
                         post.getLikes(),
-                        post.getReply(),
+                        post.getReplyCount(),
                         post.getTags()
                 ))
                 .collect(Collectors.toList());

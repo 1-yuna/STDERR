@@ -28,9 +28,9 @@ public class PostController {
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
 
-    //게시물 post
+    // 게시물 post
     @PostMapping("/api/post")
-    public ResponseEntity<PostResponseDTO> creatPost(@RequestBody PostRequestDTO postRequestDTO){
+    public ResponseEntity<PostResponseDTO> createPost(@RequestBody PostRequestDTO postRequestDTO){
 
         Optional<Category> categoryOptional = categoryRepository.findById(postRequestDTO.getCategoryId());
         Optional<User> userOptional = userRepository.findById(1L);  // 수정필요
@@ -92,7 +92,7 @@ public class PostController {
                 post.getContent(),
                 post.getCode(),
                 post.getLikes(),
-                post.getReply(),
+                post.getReplyCount(),
                 post.getTags()
         );
 

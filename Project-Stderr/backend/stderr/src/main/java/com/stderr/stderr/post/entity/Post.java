@@ -28,7 +28,7 @@ public class Post {
     private String content;
     private String code;
     private Integer likes = 0;
-    private Integer reply = 0;
+    private Integer replyCount = 0;
 
     @CreationTimestamp
     private LocalDateTime createdAt;  // 생성 날짜
