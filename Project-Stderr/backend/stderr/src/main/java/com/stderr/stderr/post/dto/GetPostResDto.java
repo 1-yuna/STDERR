@@ -15,8 +15,8 @@ public class GetPostResDto {
         private String title;
         private String content;
         private String code;
-        private Integer likes;
-        private Integer reply;
+        private Integer likeCount;
+        private Integer replyCount;
         private Set<Tag> tags;
 
 }

@@ -1,70 +1,30 @@
 package com.stderr.stderr.like.controller;
 
-import com.stderr.stderr.post.entity.Post;
-import com.stderr.stderr.post.repository.PostRepository;
-import com.stderr.stderr.user.entity.User;
-import com.stderr.stderr.user.repository.UserRepository;
+import com.stderr.stderr.like.service.LikeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
+@RequestMapping("/api/post/like")
 @RequiredArgsConstructor
 public class LikeController {
 
-    private final PostRepository postRepository;
-    private final UserRepository userRepository;
+    private final LikeService likeService;
 
-
-    // post,myPage 좋아요
-    @PostMapping("/api/post/{postId}/like")
-    public ResponseEntity<Boolean> likePost(@PathVariable Long postId) {
-        Optional<Post> postOptional = postRepository.findById(postId);
-
-        if (postOptional.isPresent()) {
-            Post post = postOptional.get();
-            post.setLikeCount(post.getLikeCount() + 1);
-            postRepository.save(post);
-
-            // 작성자의 likeTotalCount 증가
-            User user = post.getUser();
-            user.setLikeTotalCount(user.getLikeTotalCount() + 1);
-            userRepository.save(user);
-
-            return ResponseEntity.ok(true);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
-        }
+    // 좋아요
+    @PostMapping("/{postId}")
+    public ResponseEntity<Boolean> createLike(@PathVariable Long postId) {
+        Boolean response = likeService.createLike(postId);
+        return ResponseEntity.ok(response);
     }
 
-    // post,myPage 좋아요 취소
-    @DeleteMapping("/api/post/{postId}/like")
-    public ResponseEntity<Boolean> unLikePost(@PathVariable Long postId) {
-        Optional<Post> postOptional = postRepository.findById(postId);
-        if (postOptional.isPresent()) {
-            Post post = postOptional.get();
-            if (post.getLikeCount() > 0) {
-                post.setLikeCount(post.getLikeCount() - 1);
-                postRepository.save(post);
+    //좋아요 취소
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<Boolean> deleteLike(@PathVariable Long postId) {
+        Boolean response = likeService.deleteLike(postId);
+        return ResponseEntity.ok(response);
 
-                // 작성자의 likeTotalCount 감소
-                User user = post.getUser();
-                if (user != null && user.getLikeTotalCount() > 0) {
-                    user.setLikeTotalCount(user.getLikeTotalCount() - 1);
-                    userRepository.save(user);
-                }
-                return ResponseEntity.ok(true);
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
-            }
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
-        }
     }
-
-
 
 }
