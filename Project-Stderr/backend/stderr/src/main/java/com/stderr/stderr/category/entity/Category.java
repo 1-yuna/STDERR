@@ -14,7 +14,6 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
-@ToString
 public class Category {
 
     @Id
@@ -23,7 +22,7 @@ public class Category {
     private Long categoryId;
 
     private String categoryName;
-    private Integer postCount =0;
+    private int postCount;
 
     @ToString.Exclude
     @JsonIgnore
