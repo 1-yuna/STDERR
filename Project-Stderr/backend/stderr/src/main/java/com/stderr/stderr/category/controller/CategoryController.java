@@ -4,7 +4,7 @@ import com.stderr.stderr.category.dto.CategoryResponseDTO;
 import com.stderr.stderr.category.entity.Category;
 import com.stderr.stderr.category.repository.CategoryRepository;
 import com.stderr.stderr.post.entity.Post;
-import com.stderr.stderr.post.dto.PostResponseDTO;
+import com.stderr.stderr.post.dto.PostResponse;
 import com.stderr.stderr.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -40,20 +40,20 @@ public class CategoryController {
         Integer postCount = category.getPostCount();
 
         //response 응답
-        List<PostResponseDTO> postResponseDTOs = posts.stream()
-                .map(post -> new PostResponseDTO(
-                        post.getPostId(),
-                        post.getTitle(),
-                        post.getContent(),
-                        post.getCode(),
-                        post.getLikes(),
-                        post.getReply(),
-                        post.getTags()
-                ))
-                .collect(Collectors.toList());
+//        List<PostResponse> postResponseDTOs = posts.stream()
+//                .map(post -> new PostResponse(
+//                        post.getPostId(),
+//                        post.getTitle(),
+//                        post.getContent(),
+//                        post.getCode(),
+//                        post.getLikes(),
+//                        post.getReply(),
+//                        post.getTags()
+//                ))
+//                .collect(Collectors.toList());
 
         // CategoryDTO 생성 및 반환
-        return CategoryResponseDTO.of(id, categoryName,postCount,postResponseDTOs);
-
+        // return CategoryResponseDTO.of(id, categoryName,postCount,postResponseDTOs);
+        return null;
     }
 }

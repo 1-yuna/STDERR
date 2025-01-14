@@ -1,11 +1,12 @@
 package com.stderr.stderr.post.controller;
 
 import com.stderr.stderr.post.dto.PostRequestDTO;
-import com.stderr.stderr.post.dto.PostResponseDTO;
+import com.stderr.stderr.post.dto.PostResponse;
 import com.stderr.stderr.post.entity.Post;
 import com.stderr.stderr.post.repository.PostRepository;
 import com.stderr.stderr.category.entity.Category;
 import com.stderr.stderr.category.repository.CategoryRepository;
+import com.stderr.stderr.post.service.PostService;
 import com.stderr.stderr.tag.entity.Tag;
 import com.stderr.stderr.tag.repository.TagRepository;
 import com.stderr.stderr.user.entity.User;
@@ -19,84 +20,24 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
+@RequestMapping("/api/post")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class PostController {
 
+    private final PostService postService;
     private final TagRepository tagRepository;
     private final PostRepository postRepository;
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
 
-    //게시물 post
-    @PostMapping("/api/post")
-    public ResponseEntity<PostResponseDTO> creatPost(@RequestBody PostRequestDTO postRequestDTO){
 
-        Optional<Category> categoryOptional = categoryRepository.findById(postRequestDTO.getCategoryId());
-        Optional<User> userOptional = userRepository.findById(1L);  // 수정필요
+    //게시물 생성
+    @PostMapping
+    public ResponseEntity<PostResponse.CreatePostResDTO> creatPost(@RequestBody PostRequestDTO request){
 
-        // 카운트 업데이트
-        if (categoryOptional.isPresent()) {
-            Category category = categoryOptional.get();
-            category.setPostCount(category.getPostCount() + 1);
-            categoryRepository.save(category);
-        }
-
-        if (userOptional.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        User user = userOptional.get();
-        user.setPostTotalCount(user.getPostTotalCount() + 1);
-        userRepository.save(user);
-
-
-        // 태그 처리
-        Set<Tag> tags = new HashSet<>();
-        List<String> tagNames = postRequestDTO.getTags();
-
-        if (tagNames == null) {
-            tagNames = new ArrayList<>();
-        }
-        System.out.println(tagNames);
-        for (String tagName : tagNames) {
-            Optional<Tag> optionalTag = tagRepository.findByTagName(tagName);
-            Tag tag;  // 변수 선언
-
-            // tag가 이미 존재할 경우
-            if (optionalTag.isPresent()) {
-                tag = optionalTag.get();
-            } else {  // 존재하지 않으면 tag 테이블에 저장
-                tag = new Tag();
-                tag.setTagName(tagName);
-                tag = tagRepository.save(tag);
-            }
-            tags.add(tag);  // 유저가 입력한 모든 태그 저장
-        }
-
-        // 저장
-        Post post = new Post();
-        post.setTitle(postRequestDTO.getTitle());
-        post.setContent(postRequestDTO.getContent());
-        post.setCode(postRequestDTO.getCode());
-        post.setCategory(categoryOptional.get());
-        post.setUser(user);
-        post.setCreatedAt(LocalDateTime.now());
-        post.setTags(tags);
-        postRepository.save(post);
-
-
-        //response 응답
-        PostResponseDTO responseDTO = new PostResponseDTO (
-                post.getPostId(),
-                post.getTitle(),
-                post.getContent(),
-                post.getCode(),
-                post.getLikes(),
-                post.getReply(),
-                post.getTags()
-        );
-
-        return ResponseEntity.ok(responseDTO);
+        PostResponse.CreatePostResDTO response = postService.createPost(request);
+        return ResponseEntity.ok(response);
 
     }
 

@@ -1,7 +1,5 @@
 package com.stderr.stderr.user.controller;
 
-import com.stderr.stderr.category.entity.Category;
-import com.stderr.stderr.post.dto.PostResponseDTO;
 import com.stderr.stderr.user.dto.JoinRequestDTO;
 import com.stderr.stderr.user.dto.UserRequestDTO;
 import com.stderr.stderr.user.dto.UserResponseDTO;

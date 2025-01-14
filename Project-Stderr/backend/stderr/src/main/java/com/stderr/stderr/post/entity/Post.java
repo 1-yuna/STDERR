@@ -1,9 +1,11 @@
 package com.stderr.stderr.post.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.stderr.stderr.tag.entity.Tag;
 import com.stderr.stderr.category.entity.Category;
 import com.stderr.stderr.user.entity.User;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,6 +18,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Builder
 @ToString
 public class Post {
 
@@ -27,12 +30,13 @@ public class Post {
     private String title;
     private String content;
     private String code;
-    private Integer likes = 0;
-    private Integer reply = 0;
+    private int likeCount;
+    private int replyCount;
 
     @CreationTimestamp
-    private LocalDateTime createdAt;  // 생성 날짜
-    private LocalDateTime updatedAt;  // 업데이트 날짜
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @ManyToOne
     @JoinColumn(name="category_id", foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
@@ -46,7 +50,6 @@ public class Post {
     @JoinTable(name = "post_tag", joinColumns = @JoinColumn(name = "post_id"),
     inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags = new HashSet<>();
-
 
 }
 

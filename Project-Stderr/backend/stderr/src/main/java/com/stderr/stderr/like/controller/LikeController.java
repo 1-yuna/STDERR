@@ -26,7 +26,7 @@ public class LikeController {
 
         if (postOptional.isPresent()) {
             Post post = postOptional.get();
-            post.setLikes(post.getLikes() + 1);
+            post.setLikeCount(post.getLikeCount() + 1);
             postRepository.save(post);
 
             // 작성자의 likeTotalCount 증가
@@ -46,8 +46,8 @@ public class LikeController {
         Optional<Post> postOptional = postRepository.findById(postId);
         if (postOptional.isPresent()) {
             Post post = postOptional.get();
-            if (post.getLikes() > 0) {
-                post.setLikes(post.getLikes() - 1);
+            if (post.getLikeCount() > 0) {
+                post.setLikeCount(post.getLikeCount() - 1);
                 postRepository.save(post);
 
                 // 작성자의 likeTotalCount 감소
