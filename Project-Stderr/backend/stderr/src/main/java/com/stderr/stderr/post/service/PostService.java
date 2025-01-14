@@ -12,7 +12,6 @@ import com.stderr.stderr.user.entity.User;
 import com.stderr.stderr.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -27,7 +26,7 @@ public class PostService {
     private final UserRepository userRepository;
 
     //게시물 생성
-    public PostResponse.CreatePostResDTO createPost(@RequestBody PostRequestDTO request) {
+    public PostResponse.CreatePostResDTO createPost(PostRequestDTO request) {
 
         // 유저 찾기
         User user = userRepository.findById(1L)
@@ -39,7 +38,6 @@ public class PostService {
 
         // 태그 저장
         Set<Tag> tags = createTag.exec(request.getTags());
-
 
         // 저장
         Post post = Post.builder()
@@ -54,12 +52,47 @@ public class PostService {
 
         postRepository.save(post);
 
-
         //response 응답
         PostResponse.CreatePostResDTO response = new PostResponse.CreatePostResDTO(
                 post.getPostId()
         );
 
         return response;
+    }
+
+
+    // 게시물 수정
+    public Boolean updatePost(Long postId, PostRequestDTO request) {
+
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+
+        Category category = categoryRepository.findById(request.getCategoryId())
+                .orElseThrow(() -> new IllegalArgumentException("Category not found"));
+
+        // tag 추가
+        Set<Tag> tags = createTag.exec(request.getTags());
+
+        // 게시물 업데이트
+        post.setTitle(request.getTitle());
+        post.setContent(request.getContent());
+        post.setCode(request.getCode());
+        post.setCategory(category);
+        post.setTags(tags);
+        post.setUpdatedAt(LocalDateTime.now());
+
+        postRepository.save(post);
+
+        return true;
+    }
+
+    public Boolean deletePost(Long postId) {
+        postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+
+        postRepository.deleteById(postId);
+
+        return true;
+
     }
 }

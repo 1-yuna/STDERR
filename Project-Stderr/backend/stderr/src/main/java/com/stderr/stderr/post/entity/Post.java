@@ -5,10 +5,7 @@ import com.stderr.stderr.tag.entity.Tag;
 import com.stderr.stderr.category.entity.Category;
 import com.stderr.stderr.user.entity.User;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -19,7 +16,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Post {
 
     @Id
