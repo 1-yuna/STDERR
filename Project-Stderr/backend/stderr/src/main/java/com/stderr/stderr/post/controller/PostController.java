@@ -1,7 +1,7 @@
 package com.stderr.stderr.post.controller;
 
 import com.stderr.stderr.post.dto.PostRequestDTO;
-import com.stderr.stderr.post.dto.PostResponse;
+import com.stderr.stderr.post.dto.CreatePostResDto;
 import com.stderr.stderr.post.entity.Post;
 import com.stderr.stderr.post.repository.PostRepository;
 import com.stderr.stderr.post.service.PostService;
@@ -23,9 +23,9 @@ public class PostController {
 
     //게시물 생성
     @PostMapping
-    public ResponseEntity<PostResponse.CreatePostResDTO> creatPost(@RequestBody PostRequestDTO request){
+    public ResponseEntity<CreatePostResDto> creatPost(@RequestBody PostRequestDTO request){
 
-        PostResponse.CreatePostResDTO response = postService.createPost(request);
+        CreatePostResDto response = postService.createPost(request);
         return ResponseEntity.ok(response);
 
     }

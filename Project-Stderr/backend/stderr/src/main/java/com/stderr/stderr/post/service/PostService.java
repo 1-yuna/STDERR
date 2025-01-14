@@ -4,7 +4,7 @@ import com.stderr.stderr.category.entity.Category;
 import com.stderr.stderr.category.repository.CategoryRepository;
 import com.stderr.stderr.post.component.CreateTag;
 import com.stderr.stderr.post.dto.PostRequestDTO;
-import com.stderr.stderr.post.dto.PostResponse;
+import com.stderr.stderr.post.dto.CreatePostResDto;
 import com.stderr.stderr.post.entity.Post;
 import com.stderr.stderr.post.repository.PostRepository;
 import com.stderr.stderr.tag.entity.Tag;
@@ -26,7 +26,7 @@ public class PostService {
     private final UserRepository userRepository;
 
     //게시물 생성
-    public PostResponse.CreatePostResDTO createPost(PostRequestDTO request) {
+    public CreatePostResDto createPost(PostRequestDTO request) {
 
         // 유저 찾기
         User user = userRepository.findById(1L)
@@ -53,7 +53,7 @@ public class PostService {
         postRepository.save(post);
 
         //response 응답
-        PostResponse.CreatePostResDTO response = new PostResponse.CreatePostResDTO(
+        CreatePostResDto response = new CreatePostResDto(
                 post.getPostId()
         );
 
