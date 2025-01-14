@@ -3,6 +3,7 @@ package com.stderr.stderr.post.service;
 import com.stderr.stderr.category.entity.Category;
 import com.stderr.stderr.category.repository.CategoryRepository;
 import com.stderr.stderr.post.component.CreateTag;
+import com.stderr.stderr.post.dto.GetPostResDto;
 import com.stderr.stderr.post.dto.PostRequestDTO;
 import com.stderr.stderr.post.dto.CreatePostResDto;
 import com.stderr.stderr.post.entity.Post;
@@ -86,6 +87,7 @@ public class PostService {
         return true;
     }
 
+    // 게시물 삭제
     public Boolean deletePost(Long postId) {
         postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("Post not found"));
@@ -95,4 +97,23 @@ public class PostService {
         return true;
 
     }
+
+    // 게시물 불러오기
+    public GetPostResDto getPost(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+
+        GetPostResDto response = new GetPostResDto(
+                post.getPostId(),
+                post.getTitle(),
+                post.getContent(),
+                post.getCode(),
+                post.getLikeCount(),
+                post.getReplyCount(),
+                post.getTags()
+        );
+        return response;
+
+    }
+
 }
